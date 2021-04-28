@@ -27,6 +27,23 @@ header {
     height: 30%;
 }
 
+form input[type=text] {
+    width: 50vw;
+    height: 8vh;
+    padding: 20px;
+    outline: none;
+    border: 2px solid #20bf6b;
+    border-radius: 10px;
+
+}
+
+form input[type=submit] {
+    background: red;
+    width: 10vw;
+    height: 7vh;
+
+}
+
 /* ============================= Main ============================= */
 main {
     border: 1px solid green;
@@ -36,16 +53,6 @@ main {
     align-items: center;
     width: 100%;
     height: 55%;
-}
-
-form input[type=text] {
-    width: 50vw;
-    height: 8vh;
-    padding: 20px;
-    outline: none;
-    border: 2px solid #20bf6b;
-    border-radius: 10px;
-
 }
 
 section {

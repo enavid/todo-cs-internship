@@ -14,6 +14,6 @@ addButton.addEventListener("click", (e) => {
 
     p.innerHTML = value;
     li.appendChild(p);
-    ul.appendChild(li);
+    ul.prepend(li);
 
 })

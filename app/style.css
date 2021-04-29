@@ -56,16 +56,22 @@ main {
 }
 
 section {
+    width: 100%;
+    height: 100%;
+}
+
+ul {
     display: flex;
     flex-direction: column;
     justify-content: first baseline;
     align-items: center;
+    border: 1px solid black;
+    list-style: none;
     width: 100%;
     height: 100%;
-
 }
 
-.todos {
+li {
     width: 50%;
     height: 60px;
     padding: 15px;

@@ -9,10 +9,11 @@ addButton.addEventListener("click", (e) => {
     e.preventDefault();
 
     const li = create('li');
+    const p = create('p');
     const value = textField.value;
 
-    li.innerHTML = value;
+    p.innerHTML = value;
+    li.appendChild(p);
     ul.appendChild(li);
-    ul.appendChild(div);
 
 })

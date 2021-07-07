@@ -96,6 +96,17 @@ img {
     height: 30px;
 }
 
+input {
+    margin: 6px;
+}
+
+#ul-1 {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
 /* ============================= Footer =========================== */
 footer {
     display: flex;

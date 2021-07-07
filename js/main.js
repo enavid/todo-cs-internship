@@ -14,6 +14,7 @@ addButton.addEventListener("click", (e) => {
     const span1 = create('span');
     const span2 = create('span');
     const input = create('input');
+    const i = create('i');
     const value = textField.value;
 
     span1.setAttribute('id', 'ul-1');
@@ -26,6 +27,8 @@ addButton.addEventListener("click", (e) => {
     span2.setAttribute('id', 'ul-2');
     trash.setAttribute('src', './public/icon/trash.png');
     trash.setAttribute('alt', 'trash');
+    i.setAttribute('class', "fa fa-pencil");
+    span2.appendChild(i);
     span2.appendChild(trash);
     li.appendChild(span2);
 

@@ -14,10 +14,14 @@ const module = (function () {
         input.setAttribute('type', 'checkbox');
         input.addEventListener('click', () => {
             todo.complete = !todo.complete;
+            p.setAttribute('class',
+                todo.complete ? 'complete' : 'incomplete'
+            )
             console.log(todo)
         });
         span1.appendChild(input);
         p.innerHTML = todo.value;
+        p.setAttribute('class', 'incomplete')
         span1.appendChild(p);
         li.appendChild(span1);
 

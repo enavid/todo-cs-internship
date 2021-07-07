@@ -10,10 +10,15 @@ addButton.addEventListener("click", (e) => {
 
     const li = create('li');
     const p = create('p');
+    const trash = create('img')
     const value = textField.value;
+
+    trash.setAttribute('src', './public/icon/trash.png');
+    trash.setAttribute('alt', 'trash');
 
     p.innerHTML = value;
     li.appendChild(p);
+    li.appendChild(trash);
     ul.prepend(li);
     textField.value = '';
 

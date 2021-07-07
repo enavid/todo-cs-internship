@@ -107,6 +107,19 @@ input {
     width: 80%;
 }
 
+i {
+    margin: 5px;
+}
+
+#ul-2 {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 60px;
+    height: 30px;
+}
+
 /* ============================= Footer =========================== */
 footer {
     display: flex;

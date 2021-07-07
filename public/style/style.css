@@ -120,6 +120,10 @@ i {
     height: 30px;
 }
 
+.complite {
+    text-decoration-line: line-through;
+}
+
 /* ============================= Footer =========================== */
 footer {
     display: flex;

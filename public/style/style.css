@@ -81,7 +81,6 @@ ul {
 li {
     display: flex;
     justify-content: space-between;
-
     width: 80vw;
     height: 60px;
     padding: 15px;
@@ -105,6 +104,7 @@ input {
     display: flex;
     flex-direction: row;
     width: 80%;
+    height: 100%;
 }
 
 i {
@@ -125,21 +125,37 @@ i {
 }
 
 #edit {
-    border: 1px solid rgb(161, 132, 132);
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-#edit span p {
-    margin: 5px;
+#edit span {
+    border: 1px solid red;
+    display: 'flex';
+    flex-direction: row;
+    justify-content: space-between;
+    width: 10%;
 }
 
 #confirmEdit {
     display: flex;
     flex-direction: row;
 
+}
+
+#editInput {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 12px 20px 12px 20px;
+    margin: 0;
+    background-color: #DDDDDD;
+    font: 16px;
 }
 
 /* ============================= Footer =========================== */

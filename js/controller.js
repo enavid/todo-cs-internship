@@ -1,6 +1,7 @@
 (function controller() {
     const todos = [];
-    const module = { addItem, removeItem, toggleComplete, updateItem }
+    var _filter = 0;
+    const module = { addItem, removeItem, toggleComplete, updateItem, setFilter };
     //================================ controller AIP===========================
 
     view.init(module)
@@ -22,6 +23,11 @@
     function removeItem(item) {
         todos.splice(todos.indexOf(item), 1);
         view.render(todos);
+    }
+
+    function setFilter(filter) {
+        console.log(filter)
+        _filter = filter;
     }
 
 })();

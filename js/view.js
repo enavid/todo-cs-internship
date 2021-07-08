@@ -4,18 +4,39 @@ view = (function () {
     const addButton = get('addButton');
     const textField = get('textField');
     const list = get('list');
+    const allButton = get('allButton');
+    const activeButton = get('activeButton');
+    const completeButton = get('completeButton');
     const item = createItem();
     var control;
     const init = function (module) {
         control = module;
     }
     //=========================== view event listener ====================
-    addButton.addEventListener("click", (e) => {
+    addButton.addEventListener('click', (e) => {
         e.preventDefault();
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
         list.prepend(item.createLi(value, { checkBox, trash, edit }));
         control.addItem(value);
+    })
+
+    allButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        control.setFilter(0);
+        console.log('All');
+    })
+
+    activeButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        control.setFilter(1);
+        console.log('active');
+    })
+
+    completeButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        control.setFilter(2);
+        console.log('complete');
     })
 
     //=========================== define view function ===================

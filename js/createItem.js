@@ -1,7 +1,7 @@
-const module = (function () {
+const createItem = function () {
     const create = document.createElement.bind(document);
 
-    const createItem = function (todo) {
+    const createItem = function (todo, eventListener) {
         const li = create('li');
         const p = create('p');
         const trash = create('img');
@@ -13,10 +13,7 @@ const module = (function () {
         span1.setAttribute('id', 'ul-1');
         input.setAttribute('type', 'checkbox');
         input.addEventListener('click', () => {
-            todo.complete = !todo.complete;
-            p.setAttribute('class',
-                todo.complete ? 'complete' : 'incomplete'
-            );
+            if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, p }) }
         });
         span1.appendChild(input);
         p.innerHTML = todo.value;
@@ -29,9 +26,11 @@ const module = (function () {
         trash.setAttribute('alt', 'trash');
         trash.addEventListener('click', () => {
             console.log(todo);
+            if (isFunction(eventListener.delete)) { eventListenerdelete() }
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
+            if (isFunction(eventListener.edit)) { eventListener.edit() }
             console.log('edit');
         })
         span2.appendChild(i);
@@ -41,10 +40,13 @@ const module = (function () {
         return li;
 
     }
-
+    // =============================== define function =====================
+    function isFunction(functionToCheck) {
+        return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+    }
     //================================ module AIP===========================
     return {
         createItem,
     }
 
-})()
+}

@@ -25,13 +25,11 @@ const createItem = function () {
         trash.setAttribute('src', './public/icon/trash.png');
         trash.setAttribute('alt', 'trash');
         trash.addEventListener('click', () => {
-            console.log(todo);
-            if (isFunction(eventListener.delete)) { eventListenerdelete() }
+            if (isFunction(eventListener.trash)) { eventListener.trash({ todo }) }
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit() }
-            console.log('edit');
+            if (isFunction(eventListener.edit)) { eventListener.edit({ todo }) }
         })
         span2.appendChild(i);
         span2.appendChild(trash);

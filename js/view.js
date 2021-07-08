@@ -34,7 +34,7 @@ view = (function () {
     }
 
     function trash(element) {
-        control.removeItem(element);
+        control.removeItem(element.todo);
     }
 
     function edit(element) {

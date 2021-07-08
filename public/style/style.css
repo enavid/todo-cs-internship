@@ -124,6 +124,24 @@ i {
     text-decoration-line: line-through;
 }
 
+#edit {
+    border: 1px solid rgb(161, 132, 132);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#edit span p {
+    margin: 5px;
+}
+
+#confirmEdit {
+    display: flex;
+    flex-direction: row;
+
+}
+
 /* ============================= Footer =========================== */
 footer {
     display: flex;

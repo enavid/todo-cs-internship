@@ -1,14 +1,19 @@
 const createItem = function () {
     const create = document.createElement.bind(document);
 
-    const createItem = function (todo, eventListener) {
+    const createLi = function (todo, eventListener) {
         const li = create('li');
         const p = create('p');
         const trash = create('img');
         const span1 = create('span');
         const span2 = create('span');
+        const editSpan = create('span');
         const input = create('input');
         const i = create('i');
+        const confirmSpan = create('span');
+        const textInput = create('input');
+        const check = create('p');
+        const close = create('p');
 
         span1.setAttribute('id', 'ul-1');
         input.setAttribute('type', 'checkbox');
@@ -29,22 +34,50 @@ const createItem = function () {
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ li }) }
+            if (isFunction(eventListener.edit)) {
+                eventListener.edit({
+                    'event': 'edit', 'data': li
+                });
+            }
         })
+
+        //========================== create Edit Input ======================
+
+        editSpan.setAttribute('id', 'edit')
+        check.innerHTML = "&#10004;";
+        close.innerHTML = "&#10008;";
+
+        check.addEventListener('click', () => {
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'check', 'data': li }) }
+        })
+        close.addEventListener('click', () => {
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'close', 'data': li }) }
+        })
+
+        confirmSpan.appendChild(close);
+        confirmSpan.appendChild(check);
+        confirmSpan.setAttribute('id', 'confirmEdit')
+
+        editSpan.appendChild(textInput);
+        editSpan.appendChild(confirmSpan);
+        editSpan.style.display = 'none';
+
         span2.appendChild(i);
         span2.appendChild(trash);
         li.appendChild(span2);
+        li.appendChild(editSpan)
 
         return li;
 
     }
+
     // =============================== define function =====================
     function isFunction(functionToCheck) {
         return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
     }
     //================================ module AIP===========================
     return {
-        createItem,
+        createLi,
     }
 
 }

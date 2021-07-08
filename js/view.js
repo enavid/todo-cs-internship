@@ -14,7 +14,7 @@ view = (function () {
         e.preventDefault();
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
-        list.prepend(item.createItem(value, { checkBox, trash, edit }));
+        list.prepend(item.createLi(value, { checkBox, trash, edit }));
         control.addItem(value);
     })
 
@@ -22,8 +22,15 @@ view = (function () {
     function render(todos) {
         list.innerHTML = '';
         todos.forEach(element => {
-            list.prepend(item.createItem(element, { checkBox, trash, edit }));
+            list.prepend(item.createLi(element, { checkBox, trash, edit }));
         });
+    }
+
+    function renderEditInput(item) {
+        [...item.data.children].forEach(element => {
+            element.style.display = element.style.display ===
+                'none' ? 'flex' : 'none';
+        })
     }
 
     function checkBox(element) {
@@ -38,10 +45,17 @@ view = (function () {
     }
 
     function edit(element) {
-        console.log('edit');
-        [...element.li.children].forEach(element => {
-            element.style.display = 'none';
-        })
+        console.log(element)
+        renderEditInput(element)
+
+        function check(item) {
+            console.log(item.input.value);
+        }
+
+        function close(item) {
+            console.log(item.input.value);
+            displayEditInput(element, 'flex')
+        }
     }
     //================================ view AIP===========================
     return { init, render }

@@ -1,14 +1,14 @@
 (function controller() {
-    const todos = [];
+    const _todos = [];
     var _filter = 0;
-    const module = { addItem, removeItem, toggleComplete, updateItem, setFilter };
+    const module = { addItem, removeItem, toggleComplete, updateItem, filterItem, setFilter };
     //================================ controller AIP===========================
 
     view.init(module)
 
     // =============================== controller define function =====================
     function addItem(item) {
-        todos.push(item);
+        _todos.push(item);
     }
 
     function toggleComplete(item) {
@@ -17,17 +17,26 @@
 
     function updateItem(item, update) {
         item.value = update;
-        view.render(todos);
+        view.render(_todos);
     }
 
     function removeItem(item) {
-        todos.splice(todos.indexOf(item), 1);
-        view.render(todos);
+        _todos.splice(_todos.indexOf(item), 1);
+        render(_todos);
     }
 
     function setFilter(filter) {
-        console.log(filter)
         _filter = filter;
+        render();
+    }
+
+    function filterItem() {
+        return _filter === 0 ? _todos :
+            _filter === 1 ? _todos.filter(item => !item.complete) :
+                _todos.filter(item => item.complete);
+    }
+    function render() {
+        view.render(filterItem(_todos));
     }
 
 })();

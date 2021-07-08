@@ -38,10 +38,8 @@ view = (function () {
 
     //=========================== define view function ===================
     function render(todos) {
-        list.innerHTML = ' ';
-
+        list.innerHTML = '';
         todos.forEach(element => {
-            console.log(list)
             list.prepend(item.createLi(element, { checkBox, trash, edit }));
         });
     }
@@ -55,9 +53,10 @@ view = (function () {
 
     function checkBox(element) {
         control.toggleComplete(element.todo);
-        element.p.setAttribute('class',
-            element.todo.complete ? 'complete' : 'incomplete'
-        );
+        element.p.className = element.todo.complete ? 'complete' : 'incomplete';
+        // element.p.setAttribute('class',
+        //     element.todo.complete ? 'complete' : 'incomplete'
+        // );
     }
 
     function trash(element) {

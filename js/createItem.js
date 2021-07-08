@@ -8,7 +8,7 @@ const createItem = function () {
         const span1 = create('span');
         const span2 = create('span');
         const editSpan = create('span');
-        const input = create('input');
+        const checkbox = create('input');
         const i = create('i');
         const confirmSpan = create('span');
         const editInput = create('input');
@@ -16,13 +16,14 @@ const createItem = function () {
         const close = create('p');
 
         span1.setAttribute('id', 'ul-1');
-        input.setAttribute('type', 'checkbox');
-        input.addEventListener('click', () => {
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.checked = todo.complete;
+        checkbox.addEventListener('click', () => {
             if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, p }) }
         });
-        span1.appendChild(input);
+        span1.appendChild(checkbox);
         p.innerHTML = todo.value;
-        p.setAttribute('class', 'incomplete')
+        p.className = todo.complete ? 'complete' : 'incomplete';
         span1.appendChild(p);
         li.appendChild(span1);
 

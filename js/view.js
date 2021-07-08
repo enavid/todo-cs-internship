@@ -24,25 +24,24 @@ view = (function () {
     allButton.addEventListener('click', (e) => {
         e.preventDefault();
         control.setFilter(0);
-        console.log('All');
     })
 
     activeButton.addEventListener('click', (e) => {
         e.preventDefault();
         control.setFilter(1);
-        console.log('active');
     })
 
     completeButton.addEventListener('click', (e) => {
         e.preventDefault();
         control.setFilter(2);
-        console.log('complete');
     })
 
     //=========================== define view function ===================
     function render(todos) {
-        list.innerHTML = '';
+        list.innerHTML = ' ';
+
         todos.forEach(element => {
+            console.log(list)
             list.prepend(item.createLi(element, { checkBox, trash, edit }));
         });
     }

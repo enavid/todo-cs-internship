@@ -56,7 +56,7 @@ const createItem = function () {
         confirmSpan.appendChild(check);
         confirmSpan.setAttribute('id', 'confirmEdit')
 
-        editInput.setAttribute('id', 'editInput');
+        editInput.setAttribute('class', 'editInput');
         editSpan.appendChild(editInput);
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';

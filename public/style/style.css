@@ -146,7 +146,7 @@ i {
 
 }
 
-#editInput {
+.editInput {
     display: flex;
     width: 80%;
     height: 100%;

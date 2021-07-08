@@ -14,6 +14,7 @@ view = (function () {
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
         ul.prepend(item.createItem(value, { checkBox, trash, edit }));
+        control.addTodos(value);
 
         function checkBox(element) {
             console.log(element.todo)
@@ -25,7 +26,7 @@ view = (function () {
 
         function trash(element) {
             console.log('trash');
-            console.log(element);
+            control.removeTodos(element);
         }
 
         function edit(element) {

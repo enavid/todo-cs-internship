@@ -15,7 +15,7 @@ view = (function () {
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
         list.prepend(item.createItem(value, { checkBox, trash, edit }));
-        control.addTodos(value);
+        control.addItem(value);
     })
 
     //=========================== define view function ===================
@@ -23,7 +23,6 @@ view = (function () {
         list.innerHTML = '';
         todos.forEach(element => {
             list.prepend(item.createItem(element, { checkBox, trash, edit }));
-            console.log(element);
         });
     }
 
@@ -35,7 +34,7 @@ view = (function () {
     }
 
     function trash(element) {
-        control.removeTodos(element);
+        control.removeItem(element);
     }
 
     function edit(element) {

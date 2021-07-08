@@ -5,7 +5,7 @@
 
     view.init(module)
 
-    // =============================== define function =====================
+    // =============================== controller define function =====================
     function addTodos(item) {
         todos.push(item);
         console.log(todos)
@@ -13,9 +13,11 @@
     function toggleComplete(item) {
         item.complete = !item.complete;
     }
+
     function removeTodos(item) {
         console.log(todos)
         todos.splice(todos.indexOf(item), 1);
+        view.render(todos);
 
     }
 

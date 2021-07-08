@@ -29,7 +29,7 @@ const createItem = function () {
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ todo }) }
+            if (isFunction(eventListener.edit)) { eventListener.edit({ li }) }
         })
         span2.appendChild(i);
         span2.appendChild(trash);

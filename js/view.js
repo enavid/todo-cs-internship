@@ -39,7 +39,9 @@ view = (function () {
 
     function edit(element) {
         console.log('edit');
-        console.log(element);
+        [...element.li.children].forEach(element => {
+            element.style.display = 'none';
+        })
     }
     //================================ view AIP===========================
     return { init, render }

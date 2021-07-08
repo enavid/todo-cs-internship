@@ -16,8 +16,7 @@ const module = (function () {
             todo.complete = !todo.complete;
             p.setAttribute('class',
                 todo.complete ? 'complete' : 'incomplete'
-            )
-            console.log(todo)
+            );
         });
         span1.appendChild(input);
         p.innerHTML = todo.value;
@@ -29,7 +28,7 @@ const module = (function () {
         trash.setAttribute('src', './public/icon/trash.png');
         trash.setAttribute('alt', 'trash');
         trash.addEventListener('click', () => {
-            console.log('trash');
+            console.log(todo);
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {

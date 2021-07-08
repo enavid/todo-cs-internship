@@ -27,7 +27,7 @@ view = (function () {
     }
 
     function renderEditInput(item) {
-        [...item.data.children].forEach(element => {
+        [...item.tag.children].forEach(element => {
             element.style.display = element.style.display ===
                 'none' ? 'flex' : 'none';
         })
@@ -45,16 +45,17 @@ view = (function () {
     }
 
     function edit(element) {
-        console.log(element)
         renderEditInput(element)
 
+        if (element.event == 'check') { check(element); }
+        if (element.event == 'close') { close(element.value); }
         function check(item) {
-            console.log(item.input.value);
+            control.updateItem(item.todo, item.input.value)
         }
 
         function close(item) {
-            console.log(item.input.value);
-            displayEditInput(element, 'flex')
+            console.log(item)
+            item.innerHTML = ' ';
         }
     }
     //================================ view AIP===========================

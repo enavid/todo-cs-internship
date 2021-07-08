@@ -36,7 +36,7 @@ const createItem = function () {
         i.addEventListener('click', () => {
             if (isFunction(eventListener.edit)) {
                 eventListener.edit({
-                    'event': 'edit', 'data': li
+                    'event': 'edit', 'tag': li
                 });
             }
         })
@@ -48,10 +48,10 @@ const createItem = function () {
         close.innerHTML = "&#10008;";
 
         check.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'check', 'data': li }) }
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'check', 'tag': li, 'input': textInput, todo }) }
         })
         close.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'close', 'data': li }) }
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'close', 'tag': li, 'input': textInput, todo }) }
         })
 
         confirmSpan.appendChild(close);

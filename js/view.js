@@ -54,9 +54,6 @@ view = (function () {
     function checkBox(element) {
         control.toggleComplete(element.todo);
         element.p.className = element.todo.complete ? 'complete' : 'incomplete';
-        // element.p.setAttribute('class',
-        //     element.todo.complete ? 'complete' : 'incomplete'
-        // );
     }
 
     function trash(element) {
@@ -66,16 +63,8 @@ view = (function () {
     function edit(element) {
         renderEditInput(element)
 
-        if (element.event == 'check') { check(element); }
-        if (element.event == 'close') { close(element.value); }
-        function check(item) {
-            control.updateItem(item.todo, item.input.value)
-        }
-
-        function close(item) {
-            console.log(item)
-            item.innerHTML = ' ';
-        }
+        if (element.event == 'check') { control.updateItem(element.todo, element.input.value) }
+        if (element.event == 'close') { element.input.value = ''; }
     }
     //================================ view AIP===========================
     return { init, render }

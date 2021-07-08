@@ -36,7 +36,6 @@ const createItem = function () {
         i.addEventListener('click', () => {
             editInput.value = todo.value;
             editInput.focus();
-            console.log(editInput)
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
@@ -58,7 +57,6 @@ const createItem = function () {
         confirmSpan.setAttribute('id', 'confirmEdit')
 
         editInput.setAttribute('id', 'editInput');
-        editInput.innerHTML = "navid";
         editSpan.appendChild(editInput);
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';

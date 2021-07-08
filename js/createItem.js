@@ -35,7 +35,7 @@ const createItem = function () {
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
             editInput.value = todo.value;
-            editInput.focus();
+            //editInput.focus();
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 

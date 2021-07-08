@@ -46,8 +46,7 @@ view = (function () {
 
     function renderEditInput(item) {
         [...item.tag.children].forEach(element => {
-            element.style.display = element.style.display ===
-                'none' ? 'flex' : 'none';
+            element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         })
     }
 

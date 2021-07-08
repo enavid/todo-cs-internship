@@ -15,8 +15,8 @@ const createItem = function () {
         const check = create('p');
         const close = create('p');
 
-        span1.setAttribute('id', 'ul-1');
-        checkbox.setAttribute('type', 'checkbox');
+        span1.id = 'ul-1';
+        checkbox.type = 'checkbox';
         checkbox.checked = todo.complete;
         checkbox.addEventListener('click', () => {
             if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, p }) }
@@ -27,22 +27,21 @@ const createItem = function () {
         span1.appendChild(p);
         li.appendChild(span1);
 
-        span2.setAttribute('id', 'ul-2');
-        trash.setAttribute('src', './public/icon/trash.png');
-        trash.setAttribute('alt', 'trash');
+        span2.id = 'ul-2';
+        trash.src = './public/icon/trash.png';
+        trash.alt = 'trash';
         trash.addEventListener('click', () => {
             if (isFunction(eventListener.trash)) { eventListener.trash({ todo }) }
         })
-        i.setAttribute('class', "fa fa-pencil");
+        i.className = "fa fa-pencil";
         i.addEventListener('click', () => {
             editInput.value = todo.value;
-            //editInput.focus();
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
         //========================== create Edit Input ======================
 
-        editSpan.setAttribute('id', 'edit')
+        editSpan.id = 'edit';
         check.innerHTML = "&#10004;";
         close.innerHTML = "&#10008;";
 
@@ -55,9 +54,9 @@ const createItem = function () {
 
         confirmSpan.appendChild(close);
         confirmSpan.appendChild(check);
-        confirmSpan.setAttribute('id', 'confirmEdit')
+        confirmSpan.id = 'confirmEdit';
 
-        editInput.setAttribute('class', 'editInput');
+        editInput.className = 'editInput';
         editSpan.appendChild(editInput);
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';

@@ -1,19 +1,15 @@
 const createItem = function () {
     const create = document.createElement.bind(document);
 
-    const createLi = function (todo, eventListener) {
+    const listItem = function (todo, eventListener) {
         const li = create('li');
         const todoText = create('p');
         const trash = create('img');
         const span1 = create('span');
         const span2 = create('span');
-        const editSpan = create('span');
         const checkbox = create('input');
-        const confirmSpan = create('span');
-        const inputEdit = create('input');
         const penEditButton = create('i');
-        const checkEditButton = create('p');
-        const closeEditButton = create('p');
+
 
         span1.id = 'ul-1';
         checkbox.type = 'checkbox';
@@ -35,11 +31,15 @@ const createItem = function () {
         })
         penEditButton.className = "fa fa-pencil";
         penEditButton.addEventListener('click', () => {
-            inputEdit.value = todo.value;
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
         //========================== create Edit Input ======================
+        const inputEdit = create('input');
+        const checkEditButton = create('p');
+        const closeEditButton = create('p');
+        const confirmSpan = create('span');
+        const editSpan = create('span');
 
         editSpan.id = 'edit';
         checkEditButton.innerHTML = "&#10004;";
@@ -57,17 +57,18 @@ const createItem = function () {
         confirmSpan.id = 'confirmEdit';
 
         inputEdit.className = 'inputEdit';
+        inputEdit.value = todo.value;
+
         editSpan.appendChild(inputEdit);
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';
 
+        //========================== Add item to List =======================
         span2.appendChild(penEditButton);
         span2.appendChild(trash);
         li.appendChild(span2);
-        li.appendChild(editSpan)
-
+        li.appendChild(editSpan);
         return li;
-
     }
 
     // =============================== define function =====================
@@ -76,7 +77,7 @@ const createItem = function () {
     }
     //================================ module AIP===========================
     return {
-        createLi,
+        listItem,
     }
 
 }

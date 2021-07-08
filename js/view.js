@@ -17,7 +17,7 @@ view = (function () {
         e.preventDefault();
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
-        list.prepend(item.createLi(value, { checkBox, trash, edit }));
+        list.prepend(item.listItem(value, { checkBox, trash, edit }));
         control.addItem(value);
     })
 
@@ -40,7 +40,7 @@ view = (function () {
     function render(todos) {
         list.innerHTML = '';
         todos.forEach(element => {
-            list.prepend(item.createLi(element, { checkBox, trash, edit }));
+            list.prepend(item.listItem(element, { checkBox, trash, edit }));
         });
     }
 

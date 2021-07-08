@@ -1,6 +1,6 @@
 (function controller() {
     const todos = [];
-    const module = { addTodos, removeTodos }
+    const module = { addTodos, removeTodos, toggleComplete }
     //================================ controller AIP===========================
 
     view.init(module)
@@ -9,6 +9,9 @@
     function addTodos(item) {
         todos.push(item);
         console.log(todos)
+    }
+    function toggleComplete(item) {
+        item.complete = !item.complete;
     }
     function removeTodos(item) {
         console.log(todos)

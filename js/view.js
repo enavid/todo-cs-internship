@@ -17,15 +17,13 @@ view = (function () {
         control.addTodos(value);
 
         function checkBox(element) {
-            console.log(element.todo)
-            element.todo.complete = !element.todo.complete;
+            control.toggleComplete(element.todo);
             element.p.setAttribute('class',
                 element.todo.complete ? 'complete' : 'incomplete'
             );
         }
 
         function trash(element) {
-            console.log('trash');
             control.removeTodos(element);
         }
 

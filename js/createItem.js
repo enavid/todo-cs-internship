@@ -34,11 +34,10 @@ const createItem = function () {
         })
         i.setAttribute('class', "fa fa-pencil");
         i.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) {
-                eventListener.edit({
-                    'event': 'edit', 'tag': li
-                });
-            }
+            editInput.value = todo.value;
+            editInput.focus();
+            console.log(editInput)
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
         //========================== create Edit Input ======================
@@ -58,7 +57,8 @@ const createItem = function () {
         confirmSpan.appendChild(check);
         confirmSpan.setAttribute('id', 'confirmEdit')
 
-        editInput.setAttribute('id', 'editInput')
+        editInput.setAttribute('id', 'editInput');
+        editInput.innerHTML = "navid";
         editSpan.appendChild(editInput);
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';

@@ -19,7 +19,7 @@
     }
 
     function updateItem(item, update) {
-        checkIterative(item.value) ?
+        checkIterative(update) ?
             alert(update + ' item is exist !') :
             item.value = update,
             view.render(_todos);

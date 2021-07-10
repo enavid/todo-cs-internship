@@ -8,7 +8,9 @@
 
     // =============================== controller define function =====================
     function addItem(item) {
-        _todos.push(item);
+        _todos.find((data) => data.value === item.value) ?
+            alert(item.value + ' item is exist !') :
+            _todos.push(item);
     }
 
     function toggleComplete(item) {

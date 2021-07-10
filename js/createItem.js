@@ -1,21 +1,31 @@
 const createItem = function () {
 
-
     const listItem = function (todo, eventListener) {
+        const _li = createLi(todo, eventListener);
+        const _getInput = getInpu(todo, (e) => {
+            console.log(e);
+        });
+        const _editInput = editInput(todo, todo, (e) => {
+            console.log(e);
+        });
 
-
+        _li.appendChild(_editInput);
+        _li.appendChild(_getInput);
+        return _li;
     }
 
     // =============================== Define function =====================
     function isFunction(functionToCheck) {
         return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
     }
+
     function createLi() {
         const create = document.createElement.bind(document);
         const li = create('li');
+        return li;
     }
 
-    function getInput() {
+    function getInpu(todo, eventListener) {
         const create = document.createElement.bind(document);
         const todoText = create('p');
         const trash = create('img');
@@ -23,40 +33,42 @@ const createItem = function () {
         const span2 = create('span');
         const checkbox = create('input');
         const penEditButton = create('i');
+        const getInput = create('span');
 
 
         span1.setAttribute('id', 'ul-1');
         checkbox.setAttribute('type', 'checkbox');
         checkbox.checke = todo.complete;
         checkbox.addEventListener('click', () => {
-            if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, todoText }) }
+            eventListener({ 'event': 'checkBox', 'tag': getInput, todo });
         });
         span1.appendChild(checkbox);
         todoText.innerHTML = todo.value;
         todoText.className = todo.complete ? 'complete' : 'incomplete';
         span1.appendChild(todoText);
-        li.appendChild(span1);
+        getInput.appendChild(span1);
 
         span2.setAttribute('id', 'ul-2');
         trash.setAttribute('src', './public/icon/trash.png');
         trash.setAttribute('alt', 'trash');
+        trash.setAttribute('value', 'trash');
 
-        trash.addEventListener('click', () => {
-            if (isFunction(eventListener.trash)) { eventListener.trash({ todo }) }
+        span2.addEventListener('click', (e) => {
+            e.preventDefault();
+            const event = e.target.getAttribute('value');
+            eventListener({ 'event': event, 'tag': getInput, todo });
         })
+
         penEditButton.className = "fa fa-pencil";
-        penEditButton.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
-        })
-
+        penEditButton.setAttribute('value', 'penEdit')
         span2.appendChild(penEditButton);
         span2.appendChild(trash);
-        li.appendChild(span2);
+        getInput.appendChild(span2);
 
-        return li;
+        return getInput;
     }
 
-    function editInput() {
+    function editInput(todo, eventListener) {
         const create = document.createElement.bind(document);
         const inputEdit = create('input');
         const checkEditButton = create('p');
@@ -77,7 +89,7 @@ const createItem = function () {
         confirmSpan.addEventListener('click', (e) => {
             e.preventDefault();
             const event = e.target.getAttribute('value');
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': event, 'tag': li, 'input': inputEdit, todo }) }
+            eventListener({ 'event': event, 'tag': editSpan, 'input': inputEdit, todo });
         })
 
         inputEdit.className = 'inputEdit';

@@ -1,12 +1,14 @@
 const createItem = function () {
 
     const listItem = function (todo, eventListener) {
-        const _li = createLi(todo, eventListener);
-        const _getInput = getInpu(todo, (e) => {
-            console.log(e);
+        const _li = createLi();
+        const _editInput = editInput(todo, (e) => {
+            e.li = _li;
+            eventListener(e);
         });
-        const _editInput = editInput(todo, todo, (e) => {
-            console.log(e);
+        const _getInput = getInput(todo, (e) => {
+            e.li = _li;
+            eventListener(e);
         });
 
         _li.appendChild(_editInput);
@@ -15,17 +17,13 @@ const createItem = function () {
     }
 
     // =============================== Define function =====================
-    function isFunction(functionToCheck) {
-        return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
-    }
-
     function createLi() {
         const create = document.createElement.bind(document);
         const li = create('li');
         return li;
     }
 
-    function getInpu(todo, eventListener) {
+    function getInput(todo, eventListener) {
         const create = document.createElement.bind(document);
         const todoText = create('p');
         const trash = create('img');
@@ -38,9 +36,10 @@ const createItem = function () {
 
         span1.setAttribute('id', 'ul-1');
         checkbox.setAttribute('type', 'checkbox');
-        checkbox.checke = todo.complete;
-        checkbox.addEventListener('click', () => {
-            eventListener({ 'event': 'checkBox', 'tag': getInput, todo });
+        checkbox.check = todo.complete;
+        checkbox.addEventListener('click', (e) => {
+            e.todoText = todoText;
+            eventListener(e);
         });
         span1.appendChild(checkbox);
         todoText.innerHTML = todo.value;
@@ -55,8 +54,7 @@ const createItem = function () {
 
         span2.addEventListener('click', (e) => {
             e.preventDefault();
-            const event = e.target.getAttribute('value');
-            eventListener({ 'event': event, 'tag': getInput, todo });
+            eventListener(e);
         })
 
         penEditButton.className = "fa fa-pencil";
@@ -101,6 +99,7 @@ const createItem = function () {
 
         return editSpan;
     }
+
     //================================ Module AIP===========================
     return {
         listItem,

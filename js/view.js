@@ -28,35 +28,35 @@ view = (function () {
     function render(todos) {
         list.innerHTML = '';
         todos.forEach(element => {
-            list.prepend(item.listItem(element, { checkBox, trash, edit }));
+            list.prepend(renderSingleItem(element));
         });
     }
 
     function renderSingleItem(todo) {
-        list.prepend(item.listItem(todo, { checkBox, trash, edit }));
+        list.prepend(item.listItem(todo, (e) => {
+
+            if (e.target.getAttribute('type') === 'checkbox') {
+                control.toggleComplete(todo);
+                e.todoText.className = todo.complete ? 'complete' : 'incomplete';
+            }
+            if (e.target.getAttribute('value') === 'penEdit') {
+                console.log(e.li)
+                renderEditInput(e.li)
+            }
+            if (e.target.getAttribute('value') === 'trash') {
+                control.removeItem(todo);
+            }
+            //if (element.event == 'check') { control.updateItem(element.todo, element.input.value) }
+            //if (element.event == 'close') { element.input.value = ''; }
+        }));
     }
 
     function renderEditInput(item) {
-        [...item.tag.children].forEach(element => {
+        [...item.children].forEach(element => {
             element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         })
     }
 
-    function checkBox(element) {
-        control.toggleComplete(element.todo);
-        element.todoText.className = element.todo.complete ? 'complete' : 'incomplete';
-    }
-
-    function trash(element) {
-        control.removeItem(element.todo);
-    }
-
-    function edit(element) {
-        renderEditInput(element)
-
-        if (element.event == 'check') { control.updateItem(element.todo, element.input.value) }
-        if (element.event == 'close') { element.input.value = ''; }
-    }
     //================================ view AIP===========================
     return { init, render, renderSingleItem }
 })();

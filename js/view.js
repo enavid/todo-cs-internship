@@ -17,7 +17,6 @@ view = (function () {
         e.preventDefault();
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
-        list.prepend(item.listItem(value, { checkBox, trash, edit }));
         control.addItem(value);
     })
 
@@ -44,6 +43,10 @@ view = (function () {
         });
     }
 
+    function renderSingleItem(todo) {
+        list.prepend(item.listItem(todo, { checkBox, trash, edit }));
+    }
+
     function renderEditInput(item) {
         [...item.tag.children].forEach(element => {
             element.style.display = element.style.display === 'none' ? 'flex' : 'none';
@@ -66,6 +69,6 @@ view = (function () {
         if (element.event == 'close') { element.input.value = ''; }
     }
     //================================ view AIP===========================
-    return { init, render }
+    return { init, render, renderSingleItem }
 })();
 

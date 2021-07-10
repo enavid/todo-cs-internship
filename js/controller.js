@@ -10,6 +10,7 @@
     function addItem(item) {
         checkIterative(item.value) ?
             alert(item.value + ' item is exist !') :
+            view.renderSingleItem(item),
             _todos.push(item);
     }
 
@@ -27,6 +28,7 @@
     function checkIterative(value) {
         return _todos.find((data) => data.value === value)
     }
+
     function removeItem(item) {
         _todos.splice(_todos.indexOf(item), 1);
         render(_todos);

@@ -11,9 +11,9 @@ const createItem = function () {
         const penEditButton = create('i');
 
 
-        span1.id = 'ul-1';
-        checkbox.type = 'checkbox';
-        checkbox.checked = todo.complete;
+        span1.setAttribute('id', 'ul-1');
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.checke = todo.complete;
         checkbox.addEventListener('click', () => {
             if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, todoText }) }
         });
@@ -23,9 +23,10 @@ const createItem = function () {
         span1.appendChild(todoText);
         li.appendChild(span1);
 
-        span2.id = 'ul-2';
-        trash.src = './public/icon/trash.png';
-        trash.alt = 'trash';
+        span2.setAttribute('id', 'ul-2');
+        trash.setAttribute('src', './public/icon/trash.png');
+        trash.setAttribute('alt', 'trash');
+
         trash.addEventListener('click', () => {
             if (isFunction(eventListener.trash)) { eventListener.trash({ todo }) }
         })

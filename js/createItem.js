@@ -86,8 +86,8 @@ const createItem = function () {
 
         confirmSpan.addEventListener('click', (e) => {
             e.preventDefault();
-            const event = e.target.getAttribute('value');
-            eventListener({ 'event': event, 'tag': editSpan, 'input': inputEdit, todo });
+            e.inputEdit = inputEdit;
+            eventListener(e);
         })
 
         inputEdit.className = 'inputEdit';

@@ -39,15 +39,22 @@ view = (function () {
                 control.toggleComplete(todo);
                 e.todoText.className = todo.complete ? 'complete' : 'incomplete';
             }
+
             if (e.target.getAttribute('value') === 'penEdit') {
-                console.log(e.li)
-                renderEditInput(e.li)
+                renderEditInput(e.li);
             }
+
             if (e.target.getAttribute('value') === 'trash') {
                 control.removeItem(todo);
             }
-            //if (element.event == 'check') { control.updateItem(element.todo, element.input.value) }
-            //if (element.event == 'close') { element.input.value = ''; }
+
+            if (e.target.getAttribute('value') === 'check') {
+                control.updateItem(todo, e.inputEdit);
+            }
+
+            if (e.target.getAttribute('value') === 'close') {
+                renderEditInput(e.li);
+            }
         }));
     }
 

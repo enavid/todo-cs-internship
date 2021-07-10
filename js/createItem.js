@@ -1,8 +1,22 @@
 const createItem = function () {
-    const create = document.createElement.bind(document);
+
 
     const listItem = function (todo, eventListener) {
+
+
+    }
+
+    // =============================== Define function =====================
+    function isFunction(functionToCheck) {
+        return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+    }
+    function createLi() {
+        const create = document.createElement.bind(document);
         const li = create('li');
+    }
+
+    function getInput() {
+        const create = document.createElement.bind(document);
         const todoText = create('p');
         const trash = create('img');
         const span1 = create('span');
@@ -35,7 +49,15 @@ const createItem = function () {
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
-        //========================== Create Edit Input ======================
+        span2.appendChild(penEditButton);
+        span2.appendChild(trash);
+        li.appendChild(span2);
+
+        return li;
+    }
+
+    function editInput() {
+        const create = document.createElement.bind(document);
         const inputEdit = create('input');
         const checkEditButton = create('p');
         const closeEditButton = create('p');
@@ -65,17 +87,7 @@ const createItem = function () {
         editSpan.appendChild(confirmSpan);
         editSpan.style.display = 'none';
 
-        //========================== Add item to List =======================
-        span2.appendChild(penEditButton);
-        span2.appendChild(trash);
-        li.appendChild(span2);
-        li.appendChild(editSpan);
-        return li;
-    }
-
-    // =============================== Define function =====================
-    function isFunction(functionToCheck) {
-        return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+        return editSpan;
     }
     //================================ Module AIP===========================
     return {

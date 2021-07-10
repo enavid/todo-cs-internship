@@ -68,7 +68,6 @@ section {
 }
 
 ul {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     justify-content: first baseline;
@@ -90,7 +89,6 @@ li {
 }
 
 img {
-    border: 1px solid red;
     width: auto;
     height: 30px;
 }
@@ -100,7 +98,6 @@ input {
 }
 
 #ul-1 {
-    border: 1px solid black;
     display: flex;
     flex-direction: row;
     width: 80%;
@@ -112,7 +109,7 @@ i {
 }
 
 #ul-2 {
-    border: 1px solid black;
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -125,7 +122,6 @@ i {
 }
 
 #edit {
-    border: 1px solid black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -133,7 +129,6 @@ i {
 }
 
 #edit span {
-    border: 1px solid red;
     display: 'flex';
     flex-direction: row;
     justify-content: space-between;

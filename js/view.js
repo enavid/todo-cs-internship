@@ -24,7 +24,7 @@ view = (function () {
         control.setFilter(e.target.getAttribute('value'));
     })
 
-    //=========================== define view function ===================
+    //=========================== Define view function ===================
     function render(todos) {
         list.innerHTML = '';
         todos.forEach(element => {

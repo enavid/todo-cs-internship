@@ -8,6 +8,7 @@
 
     // =============================== controller define function =====================
     function addItem(item) {
+        if (item.value === '') { return alert('Please enter valid input!') }
         checkIterative(item.value) ?
             alert(item.value + ' item is exist !') :
             view.renderSingleItem(item),

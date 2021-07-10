@@ -43,18 +43,19 @@ const createItem = function () {
 
         editSpan.id = 'edit';
         checkEditButton.innerHTML = "&#10004;";
+        checkEditButton.setAttribute('value', 'check');
         closeEditButton.innerHTML = "&#10008;";
-
-        checkEditButton.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'check', 'tag': li, 'input': inputEdit, todo }) }
-        })
-        closeEditButton.addEventListener('click', () => {
-            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'close', 'tag': li, 'input': inputEdit, todo }) }
-        })
+        closeEditButton.setAttribute('value', 'close');
 
         confirmSpan.appendChild(closeEditButton);
         confirmSpan.appendChild(checkEditButton);
         confirmSpan.id = 'confirmEdit';
+
+        confirmSpan.addEventListener('click', (e) => {
+            e.preventDefault();
+            const event = e.target.getAttribute('value');
+            if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': event, 'tag': li, 'input': inputEdit, todo }) }
+        })
 
         inputEdit.className = 'inputEdit';
         inputEdit.value = todo.value;

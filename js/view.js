@@ -7,6 +7,7 @@ view = (function () {
     const allButton = get('allButton');
     const activeButton = get('activeButton');
     const completeButton = get('completeButton');
+    const buttons = get('buttons')
     const item = createItem();
     var control;
     const init = function (module) {
@@ -20,19 +21,9 @@ view = (function () {
         control.addItem(value);
     })
 
-    allButton.addEventListener('click', (e) => {
+    buttons.addEventListener('click', (e) => {
         e.preventDefault();
-        control.setFilter(0);
-    })
-
-    activeButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        control.setFilter(1);
-    })
-
-    completeButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        control.setFilter(2);
+        control.setFilter(e.target.getAttribute('value'));
     })
 
     //=========================== define view function ===================

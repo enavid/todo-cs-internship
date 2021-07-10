@@ -40,8 +40,8 @@
     }
 
     function filterItem() {
-        return _filter === 0 ? _todos :
-            _filter === 1 ? _todos.filter(item => !item.complete) :
+        return _filter === 'All' ? _todos :
+            _filter === 'Active' ? _todos.filter(item => !item.complete) :
                 _todos.filter(item => item.complete);
     }
     function render() {

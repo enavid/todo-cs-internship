@@ -4,9 +4,6 @@ view = (function () {
     const addButton = get('addButton');
     const textField = get('textField');
     const list = get('list');
-    const allButton = get('allButton');
-    const activeButton = get('activeButton');
-    const completeButton = get('completeButton');
     const buttons = get('buttons')
     const item = createItem();
     var control;
@@ -19,6 +16,7 @@ view = (function () {
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
         control.addItem(value);
+        textField.focus();
     })
 
     buttons.addEventListener('click', (e) => {

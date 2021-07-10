@@ -8,7 +8,7 @@
 
     // =============================== controller define function =====================
     function addItem(item) {
-        _todos.find((data) => data.value === item.value) ?
+        checkIterative(item.value) ?
             alert(item.value + ' item is exist !') :
             _todos.push(item);
     }
@@ -18,10 +18,15 @@
     }
 
     function updateItem(item, update) {
-        item.value = update;
-        view.render(_todos);
+        checkIterative(item.value) ?
+            alert(update + ' item is exist !') :
+            item.value = update,
+            view.render(_todos);
     }
 
+    function checkIterative(value) {
+        return _todos.find((data) => data.value === value)
+    }
     function removeItem(item) {
         _todos.splice(_todos.indexOf(item), 1);
         render(_todos);

@@ -15,7 +15,7 @@ const createItem = function () {
         checkbox.type = 'checkbox';
         checkbox.checked = todo.complete;
         checkbox.addEventListener('click', () => {
-            if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, p }) }
+            if (isFunction(eventListener.checkBox)) { eventListener.checkBox({ todo, todoText }) }
         });
         span1.appendChild(checkbox);
         todoText.innerHTML = todo.value;

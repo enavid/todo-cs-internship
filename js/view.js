@@ -52,7 +52,7 @@ view = (function () {
 
     function checkBox(element) {
         control.toggleComplete(element.todo);
-        element.p.className = element.todo.complete ? 'complete' : 'incomplete';
+        element.todoText.className = element.todo.complete ? 'complete' : 'incomplete';
     }
 
     function trash(element) {

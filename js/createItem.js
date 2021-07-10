@@ -35,7 +35,7 @@ const createItem = function () {
             if (isFunction(eventListener.edit)) { eventListener.edit({ 'event': 'edit', 'tag': li }); }
         })
 
-        //========================== create Edit Input ======================
+        //========================== Create Edit Input ======================
         const inputEdit = create('input');
         const checkEditButton = create('p');
         const closeEditButton = create('p');
@@ -73,11 +73,11 @@ const createItem = function () {
         return li;
     }
 
-    // =============================== define function =====================
+    // =============================== Define function =====================
     function isFunction(functionToCheck) {
         return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
     }
-    //================================ module AIP===========================
+    //================================ Module AIP===========================
     return {
         listItem,
     }

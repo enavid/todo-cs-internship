@@ -20,6 +20,7 @@
     }
 
     function updateItem(item, update) {
+        if (update === '') { return alert('Please enter valid input!') }
         checkIterative(update) ?
             alert(update + ' item is exist !') :
             item.value = update,

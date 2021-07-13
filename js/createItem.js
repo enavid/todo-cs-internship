@@ -34,7 +34,6 @@ const createItem = function () {
         const penEditButton = create('i');
         const getInput = create('span');
 
-
         span1.setAttribute('id', 'ul-1');
         checkbox.setAttribute('type', 'checkbox');
         checkbox.checked = todo.complete;
@@ -42,6 +41,7 @@ const createItem = function () {
             e.todoText = todoText;
             eventListener(e);
         });
+
         span1.appendChild(checkbox);
         todoText.innerHTML = todo.value;
         todoText.className = todo.complete ? 'complete' : 'incomplete';

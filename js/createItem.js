@@ -46,6 +46,7 @@ const createItem = function () {
         todoText.className = todo.complete ? 'complete' : 'incomplete';
         span1.appendChild(todoText);
         getInput.appendChild(span1);
+        getInput.setAttribute('id', 'getInput');
 
         span2.setAttribute('id', 'ul-2');
         trash.setAttribute('src', './public/icon/trash.png');

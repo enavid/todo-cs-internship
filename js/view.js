@@ -26,15 +26,14 @@ view = (function () {
 
     //=========================== Define view function ===================
     function render(todos) {
-        list.innerHTML = '';
+        list.innerHTML = ' ';
         todos.forEach(element => {
-            list.prepend(renderSingleItem(element));
+            renderSingleItem(element);
         });
     }
 
     function renderSingleItem(todo) {
         list.prepend(item.listItem(todo, (e) => {
-
             if (e.target.getAttribute('type') === 'checkbox') {
                 control.toggleComplete(todo);
                 e.todoText.className = todo.complete ? 'complete' : 'incomplete';

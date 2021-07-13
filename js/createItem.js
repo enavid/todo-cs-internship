@@ -13,6 +13,7 @@ const createItem = function () {
 
         _li.appendChild(_editInput);
         _li.appendChild(_getInput);
+
         return _li;
     }
 

@@ -49,7 +49,7 @@ view = (function () {
             }
 
             if (e.target.getAttribute('value') === 'check') {
-                control.updateItem(todo, e.inputEdit);
+                control.updateItem(todo, e.inputEdit.value);
             }
 
             if (e.target.getAttribute('value') === 'close') {

@@ -37,7 +37,7 @@ const createItem = function () {
 
         span1.setAttribute('id', 'ul-1');
         checkbox.setAttribute('type', 'checkbox');
-        checkbox.check = todo.complete;
+        checkbox.checked = todo.complete;
         checkbox.addEventListener('click', (e) => {
             e.todoText = todoText;
             eventListener(e);

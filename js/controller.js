@@ -4,7 +4,11 @@
     const module = { addItem, removeItem, toggleComplete, updateItem, filterItem, setFilter };
     //================================ controller AIP===========================
 
-    view.init(module)
+    view.init(module);
+
+    view.addEventListener((e) => {
+        console.log(e);
+    });
 
     // =============================== controller define function =====================
     function addItem(item) {

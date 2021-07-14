@@ -10,6 +10,7 @@ view = (function () {
     const init = function (module) {
         control = module;
     }
+
     //=========================== view event listener ====================
     addButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -25,18 +26,27 @@ view = (function () {
     })
 
     //=========================== Define view function ===================
+    function addEventListener(callBack) {
+        this.addEventListener = callBack;
+    }
+
     function render(todos) {
         list.innerHTML = ' ';
         todos.forEach(element => {
-            renderSingleItem(element);
+            // Fix this bug
+            list.prepend(renderSingleItem(element));
         });
     }
 
     function renderSingleItem(todo) {
         list.prepend(item.listItem(todo, (e) => {
+
+            e.todo = todo;
+
             if (e.target.getAttribute('type') === 'checkbox') {
                 control.toggleComplete(todo);
                 e.todoText.className = todo.complete ? 'complete' : 'incomplete';
+                this.addEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'penEdit') {
@@ -45,10 +55,12 @@ view = (function () {
 
             if (e.target.getAttribute('value') === 'trash') {
                 control.removeItem(todo);
+                this.addEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'check') {
                 control.updateItem(todo, e.inputEdit.value);
+                this.addEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'close') {
@@ -64,6 +76,6 @@ view = (function () {
     }
 
     //================================ view AIP===========================
-    return { init, render, renderSingleItem }
+    return { init, render, renderSingleItem, addEventListener }
 })();
 

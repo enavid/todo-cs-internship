@@ -1,4 +1,4 @@
-view = (function () {
+view = function () {
 
     const get = document.getElementById.bind(document);
     const addButton = get('addButton');
@@ -61,5 +61,5 @@ view = (function () {
 
     //================================ view AIP===========================
     return { render, renderSingleItem, addEventListener }
-})();
+};
 

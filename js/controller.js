@@ -1,10 +1,11 @@
 (function controller() {
     const _todos = [];
+    const _view = view();
     var _filter = 0;
 
     //=========================== Define view function ===================
 
-    view.addEventListener((e) => {
+    _view.addEventListener((e) => {
         const event = e.target.getAttribute('value');
 
         if (event === 'Add') { addItem(e.todo) }
@@ -23,7 +24,7 @@
         if (item.value === '') { return alert('Please enter valid input!') }
         checkIterative(item.value) ?
             alert(item.value + ' item is exist !') :
-            view.renderSingleItem(item),
+            _view.renderSingleItem(item),
             _todos.push(item);
 
     }
@@ -37,7 +38,7 @@
         checkIterative(update) ?
             alert(update + ' item is exist !') :
             item.value = update,
-            view.render(_todos);
+            _view.render(_todos);
     }
 
     function checkIterative(value) {
@@ -60,7 +61,7 @@
                 _todos.filter(item => item.complete);
     }
     function render() {
-        view.render(filterItem(_todos));
+        _view.render(filterItem(_todos));
     }
 
 })();

@@ -6,17 +6,13 @@ view = (function () {
     const list = get('list');
     const buttons = get('buttons')
     const item = createItem();
-    var control;
-    const init = function (module) {
-        control = module;
-    }
 
     //=========================== view event listener ====================
     addButton.addEventListener('click', (e) => {
         e.preventDefault();
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
-        control.addItem(value);
+        e.todo = value;
         handleEventListener(e);
         textField.focus();
     })
@@ -42,34 +38,15 @@ view = (function () {
 
     function renderSingleItem(todo) {
         list.prepend(item.listItem(todo, (e) => {
-
             e.todo = todo;
+            handleEventListener(e);
+            const event = e.target.getAttribute('value');
 
-            if (e.target.getAttribute('type') === 'checkbox') {
-                control.toggleComplete(todo);
-                e.todoText.className = todo.complete ? 'complete' : 'incomplete';
-                console.log(this);
+            if (event === 'checkBox') { e.todoText.className = todo.complete ? 'complete' : 'incomplete'; }
 
-                //handleEventListener(e);
-            }
+            if (event === 'penEdit') { renderEditInput(e.li) }
 
-            if (e.target.getAttribute('value') === 'penEdit') {
-                renderEditInput(e.li);
-            }
-
-            if (e.target.getAttribute('value') === 'trash') {
-                control.removeItem(todo);
-                //handleEventListener(e);
-            }
-
-            if (e.target.getAttribute('value') === 'check') {
-                control.updateItem(todo, e.inputEdit.value);
-                //handleEventListener(e);
-            }
-
-            if (e.target.getAttribute('value') === 'close') {
-                renderEditInput(e.li);
-            }
+            if (event === 'close') { renderEditInput(e.li) }
         }));
     }
 
@@ -80,6 +57,6 @@ view = (function () {
     }
 
     //================================ view AIP===========================
-    return { init, render, renderSingleItem, addEventListener }
+    return { render, renderSingleItem, addEventListener }
 })();
 

@@ -1,15 +1,21 @@
 (function controller() {
     const _todos = [];
     var _filter = 0;
-    const module = { addItem, removeItem, toggleComplete, updateItem, filterItem, setFilter };
-    //================================ controller AIP===========================
 
-    view.init(module);
+    //=========================== Define view function ===================
 
     view.addEventListener((e) => {
-        console.log(e);
+        const event = e.target.getAttribute('value');
+
+        if (event === 'Add') { addItem(e.todo) }
+
+        if (event === 'checkBox') { toggleComplete(e.todo) }
+
+        if (event === 'trash') { removeItem(e.todo) }
+
+        if (event === 'check') { updateItem(e.todo, e.inputEdit.value) }
     });
-    console.log(view.addEventListener)
+
     // =============================== controller define function =====================
     function addItem(item) {
         if (item.value === '') { return alert('Please enter valid input!') }
@@ -17,6 +23,7 @@
             alert(item.value + ' item is exist !') :
             view.renderSingleItem(item),
             _todos.push(item);
+
     }
 
     function toggleComplete(item) {

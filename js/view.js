@@ -26,11 +26,11 @@ view = function () {
             handleEventListener(e);
             const event = e.target.getAttribute('value');
 
-            if (event === 'checkBox') { e.todoText.className = todo.complete ? 'complete' : 'incomplete'; }
+            if (event === 'checkBox') return e.todoText.className = todo.complete ? 'complete' : 'incomplete';
 
-            if (event === 'penEdit') { renderEditInput(e.li) }
+            if (event === 'penEdit') return renderEditInput(e.li);
 
-            if (event === 'close') { renderEditInput(e.li) }
+            if (event === 'close') return renderEditInput(e.li);
         });
     }
 
@@ -55,7 +55,7 @@ view = function () {
         handleEventListener(e);
     })
 
-    //================================ view AIP===========================
+    //================================ view API ===========================
     return { render, renderSingleItem, addEventListener }
 };
 

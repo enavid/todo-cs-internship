@@ -17,6 +17,7 @@ view = (function () {
         const value = { "value": textField.value, "complete": false };
         textField.value = '';
         control.addItem(value);
+        handleEventListener(e);
         textField.focus();
     })
 
@@ -26,8 +27,9 @@ view = (function () {
     })
 
     //=========================== Define view function ===================
-    function addEventListener(callBack) {
-        this.addEventListener = callBack;
+
+    const addEventListener = (callBack) => {
+        handleEventListener = callBack;
     }
 
     function render(todos) {
@@ -46,7 +48,9 @@ view = (function () {
             if (e.target.getAttribute('type') === 'checkbox') {
                 control.toggleComplete(todo);
                 e.todoText.className = todo.complete ? 'complete' : 'incomplete';
-                this.addEventListener(e);
+                console.log(this);
+
+                //handleEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'penEdit') {
@@ -55,12 +59,12 @@ view = (function () {
 
             if (e.target.getAttribute('value') === 'trash') {
                 control.removeItem(todo);
-                this.addEventListener(e);
+                //handleEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'check') {
                 control.updateItem(todo, e.inputEdit.value);
-                this.addEventListener(e);
+                //handleEventListener(e);
             }
 
             if (e.target.getAttribute('value') === 'close') {

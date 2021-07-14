@@ -9,7 +9,7 @@
     view.addEventListener((e) => {
         console.log(e);
     });
-
+    console.log(view.addEventListener)
     // =============================== controller define function =====================
     function addItem(item) {
         if (item.value === '') { return alert('Please enter valid input!') }

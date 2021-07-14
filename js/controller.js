@@ -42,9 +42,6 @@
                 _todos.filter(item => item.complete);
     }
 
-
-
-
     //=========================== control event listener ====================
 
     _view.addEventListener((e) => {

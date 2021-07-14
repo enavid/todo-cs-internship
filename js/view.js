@@ -9,9 +9,7 @@ view = function () {
 
     //=========================== Define view function ===================
 
-    const addEventListener = (callBack) => {
-        handleEventListener = callBack;
-    }
+    const addEventListener = (callBack) => handleEventListener = callBack;
 
     const render = (todos) => {
         list.innerHTML = ' ';

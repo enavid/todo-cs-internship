@@ -33,7 +33,7 @@
 
         if (event === 'checkBox') return toggleComplete(e.todo);
 
-        if (event === 'trash') return removeItem(e.todo), _view.render(todos);
+        if (event === 'trash') return removeItem(e.todo), _view.render(_todos);
 
         if (event === 'check') return updateItem(e.todo, e.inputEdit.value), _view.render(_todos);
 

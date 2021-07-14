@@ -14,6 +14,8 @@
         if (event === 'trash') { removeItem(e.todo) }
 
         if (event === 'check') { updateItem(e.todo, e.inputEdit.value) }
+
+        if (event === 'All' || event === 'Active' || event === 'Complete') { setFilter(event) }
     });
 
     // =============================== controller define function =====================

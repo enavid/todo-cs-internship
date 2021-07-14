@@ -19,7 +19,7 @@ view = (function () {
 
     buttons.addEventListener('click', (e) => {
         e.preventDefault();
-        control.setFilter(e.target.getAttribute('value'));
+        handleEventListener(e);
     })
 
     //=========================== Define view function ===================
@@ -31,13 +31,16 @@ view = (function () {
     function render(todos) {
         list.innerHTML = ' ';
         todos.forEach(element => {
-            // Fix this bug
-            list.prepend(renderSingleItem(element));
+            list.prepend(creatItem(element));
         });
     }
 
     function renderSingleItem(todo) {
-        list.prepend(item.listItem(todo, (e) => {
+        list.prepend(creatItem(todo))
+    }
+
+    function creatItem(todo) {
+        return item.listItem(todo, (e) => {
             e.todo = todo;
             handleEventListener(e);
             const event = e.target.getAttribute('value');
@@ -47,7 +50,7 @@ view = (function () {
             if (event === 'penEdit') { renderEditInput(e.li) }
 
             if (event === 'close') { renderEditInput(e.li) }
-        }));
+        });
     }
 
     function renderEditInput(item) {

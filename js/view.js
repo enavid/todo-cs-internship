@@ -1,4 +1,4 @@
-view = function () {
+view = () => {
 
     const _get = document.getElementById.bind(document);
     const _addButton = _get('addButton');

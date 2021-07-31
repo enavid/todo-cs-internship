@@ -1,10 +1,10 @@
 view = function () {
 
-    const get = document.getElementById.bind(document);
-    const addButton = get('addButton');
-    const textField = get('textField');
-    const list = get('list');
-    const buttons = get('buttons');
+    const _get = document.getElementById.bind(document);
+    const _addButton = _get('addButton');
+    const _textField = _get('textField');
+    const _list = _get('list');
+    const _buttons = _get('buttons');
 
 
     //=========================== Define view function ===================
@@ -116,13 +116,13 @@ view = function () {
     const addEventListener = (callBack) => handleEventListener = callBack;
 
     const render = (todos) => {
-        list.innerHTML = ' ';
+        _list.innerHTML = ' ';
         todos.forEach(element => {
-            list.prepend(creatItem(element));
+            _list.prepend(creatItem(element));
         });
     }
 
-    const renderSingleItem = (todo) => list.prepend(creatItem(todo))
+    const renderSingleItem = (todo) => _list.prepend(creatItem(todo))
 
     const creatItem = (todo) => {
         return createListItem(todo, (e) => {
@@ -145,16 +145,16 @@ view = function () {
     }
 
     //=========================== view event listener ====================
-    addButton.addEventListener('click', (e) => {
+    _addButton.addEventListener('click', (e) => {
         e.preventDefault();
-        const value = { "value": textField.value, "complete": false };
-        textField.value = '';
+        const value = { "value": _textField.value, "complete": false };
+        _textField.value = '';
         e.todo = value;
         handleEventListener(e);
-        textField.focus();
+        _textField.focus();
     })
 
-    buttons.addEventListener('click', (e) => {
+    _buttons.addEventListener('click', (e) => {
         e.preventDefault();
         handleEventListener(e);
     })

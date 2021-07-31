@@ -1,4 +1,4 @@
-(function controller() {
+(() => {
     const _todos = [];
     const _view = view();
 

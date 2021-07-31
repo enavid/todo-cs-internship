@@ -4,60 +4,24 @@ view = function () {
     const addButton = get('addButton');
     const textField = get('textField');
     const list = get('list');
-    const buttons = get('buttons')
+    const buttons = get('buttons');
+
 
     //=========================== Define view function ===================
+    const createListItem = (todo, eventListener) => {
 
-    const addEventListener = (callBack) => handleEventListener = callBack;
-
-    const render = (todos) => {
-        list.innerHTML = ' ';
-        todos.forEach(element => {
-            list.prepend(creatItem(element));
+        const _li = createLi();
+        const _editInput = editInput(todo, (e) => {
+            e.li = _li;
+            eventListener(e);
         });
-    }
-
-    const renderSingleItem = (todo) => list.prepend(creatItem(todo))
-
-    const creatItem = (todo) => {
-        const item = createElement();
-        return item.listItem(todo, (e) => {
-            e.todo = todo;
-            handleEventListener(e);
-            const event = e.target.getAttribute('value');
-
-            if (event === 'checkBox') return e.todoText.className = todo.complete ? 'complete' : 'incomplete';
-
-            if (event === 'penEdit') return renderEditInput(e.li);
-
-            if (event === 'close') return renderEditInput(e.li);
+        const _getInput = getInput(todo, (e) => {
+            e.li = _li;
+            eventListener(e);
         });
-    }
 
-    const renderEditInput = (item) => {
-        [...item.children].forEach(element => {
-            element.style.display = element.style.display === 'none' ? 'flex' : 'none';
-        })
-    }
-
-    const createElement = () => {
-
-        const listItem = function (todo, eventListener) {
-            const _li = createLi();
-            const _editInput = editInput(todo, (e) => {
-                e.li = _li;
-                eventListener(e);
-            });
-            const _getInput = getInput(todo, (e) => {
-                e.li = _li;
-                eventListener(e);
-            });
-
-            _li.appendChild(_editInput);
-            _li.appendChild(_getInput);
-
-            return _li;
-        }
+        _li.appendChild(_editInput);
+        _li.appendChild(_getInput);
 
         // =============================== Define function =====================
         function createLi() {
@@ -146,10 +110,38 @@ view = function () {
         }
 
         //================================ Module AIP===========================
-        return {
-            listItem,
-        }
+        return _li;
+    }
 
+    const addEventListener = (callBack) => handleEventListener = callBack;
+
+    const render = (todos) => {
+        list.innerHTML = ' ';
+        todos.forEach(element => {
+            list.prepend(creatItem(element));
+        });
+    }
+
+    const renderSingleItem = (todo) => list.prepend(creatItem(todo))
+
+    const creatItem = (todo) => {
+        return createListItem(todo, (e) => {
+            e.todo = todo;
+            handleEventListener(e);
+            const event = e.target.getAttribute('value');
+
+            if (event === 'checkBox') return e.todoText.className = todo.complete ? 'complete' : 'incomplete';
+
+            if (event === 'penEdit') return renderEditInput(e.li);
+
+            if (event === 'close') return renderEditInput(e.li);
+        });
+    }
+
+    const renderEditInput = (item) => {
+        [...item.children].forEach(element => {
+            element.style.display = element.style.display === 'none' ? 'flex' : 'none';
+        })
     }
 
     //=========================== view event listener ====================

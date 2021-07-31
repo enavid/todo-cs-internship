@@ -7,11 +7,11 @@ model = () => {
     const getTodos = () => _todos;
 
     const removeItem = (todo) => _todos.splice(_todos.indexOf(todo), 1);
+
     //================================ Model API ===================================
     return {
         addTodo,
         getTodos,
         removeItem,
-
     }
 }

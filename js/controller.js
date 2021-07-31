@@ -6,7 +6,13 @@
     // =============================== Define control function =====================
     const addItem = (todo) => {
         if (todo.value === '') return alert('Please enter valid input!');
-        checkIterative(todo.value) ? alert(todo.value + ' Item is exist !') : _model.addTodo(todo);
+
+        if (checkIterative(todo.value)) {
+            alert(todo.value + ' Item is exist !')
+        } else {
+            _model.addTodo(todo);
+            _view.renderSingleItem(todo);
+        }
     }
 
     const toggleComplete = (todo) => todo.complete = !todo.complete;
@@ -30,7 +36,7 @@
     _view.addEventListener((e) => {
         const event = e.target.getAttribute('value');
 
-        if (event === 'Add') return addItem(e.todo), _view.renderSingleItem(e.todo);
+        if (event === 'Add') return addItem(e.todo);
 
         if (event === 'checkBox') return toggleComplete(e.todo);
 

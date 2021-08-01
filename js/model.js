@@ -8,5 +8,5 @@ const getTodos = () => _todos;
 const removeItem = (todo) => _todos.splice(_todos.indexOf(todo), 1);
 
 //================================ Model API ===================================
-const _model = { addTodo, getTodos, removeItem, }
-export default _model;
+
+export default { addTodo, getTodos, removeItem };

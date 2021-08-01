@@ -3,6 +3,7 @@ const _addButton = _get('addButton');
 const _textField = _get('textField');
 const _list = _get('list');
 const _buttons = _get('buttons');
+var _handleEventListener;
 
 //=========================== Define view function ===================
 const createListItem = (todo, eventListener) => {
@@ -109,8 +110,8 @@ const createListItem = (todo, eventListener) => {
     //================================ Module AIP===========================
     return _li;
 }
-var handleEventListener = () => { }
-const addEventListener = (callBack) => handleEventListener = callBack;
+
+const addEventListener = (callBack) => _handleEventListener = callBack;
 
 const render = (todos) => {
     _list.innerHTML = ' ';
@@ -124,7 +125,7 @@ const renderSingleItem = (todo) => _list.prepend(creatItem(todo))
 const creatItem = (todo) => {
     return createListItem(todo, (e) => {
         e.todo = todo;
-        handleEventListener(e);
+        _handleEventListener(e);
         const event = e.target.getAttribute('value');
 
         if (event === 'checkBox') return e.todoText.className = todo.complete ? 'complete' : 'incomplete';
@@ -147,16 +148,15 @@ _addButton.addEventListener('click', (e) => {
     const value = { "value": _textField.value, "complete": false };
     _textField.value = '';
     e.todo = value;
-    handleEventListener(e);
+    _handleEventListener(e);
     _textField.focus();
 })
 
 _buttons.addEventListener('click', (e) => {
     e.preventDefault();
-    handleEventListener(e);
+    _handleEventListener(e);
 })
 
 //================================ view API ===========================
-const _view = { render, renderSingleItem, addEventListener }
 
-export default _view;
+export default { render, renderSingleItem, addEventListener };

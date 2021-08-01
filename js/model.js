@@ -1,17 +1,12 @@
-model = () => {
-    const _todos = [];
+const _todos = [];
 
-    // =============================== Define control function =====================
-    const addTodo = todo => _todos.push(todo);
+// =============================== Define control function =====================
+const addTodo = todo => _todos.push(todo);
 
-    const getTodos = () => _todos;
+const getTodos = () => _todos;
 
-    const removeItem = (todo) => _todos.splice(_todos.indexOf(todo), 1);
+const removeItem = (todo) => _todos.splice(_todos.indexOf(todo), 1);
 
-    //================================ Model API ===================================
-    return {
-        addTodo,
-        getTodos,
-        removeItem,
-    }
-}
+//================================ Model API ===================================
+const _model = { addTodo, getTodos, removeItem, }
+export default _model;

@@ -130,7 +130,9 @@ function createListItem(todo, eventListener) {
     return _li;
 }
 
-function addEventListener(callBack) { _handleEventListener = callBack; }
+function addEventListener(callBack) {
+    _handleEventListener = callBack;
+}
 
 function render(todos) {
     _list.innerHTML = ' ';
@@ -139,7 +141,9 @@ function render(todos) {
     });
 }
 
-function renderSingleItem(todo) { _list.prepend(creatItem(todo)) }
+function renderSingleItem(todo) {
+    _list.prepend(creatItem(todo))
+}
 
 function creatItem(todo) {
     return createListItem(todo, (e) => {

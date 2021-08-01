@@ -5,8 +5,27 @@ const _list = _get('list');
 const _buttons = _get('buttons');
 var _handleEventListener;
 
+//================================ view API ===========================
+
+export default { render, renderSingleItem, addEventListener };
+
+//=========================== view event listener ====================
+_addButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const value = { "value": _textField.value, "complete": false };
+    _textField.value = '';
+    e.todo = value;
+    _handleEventListener(e);
+    _textField.focus();
+})
+
+_buttons.addEventListener('click', (e) => {
+    e.preventDefault();
+    _handleEventListener(e);
+})
+
 //=========================== Define view function ===================
-const createListItem = (todo, eventListener) => {
+function createListItem(todo, eventListener) {
 
     const _li = createLi();
     const _editInput = editInput(todo, (e) => {
@@ -111,18 +130,18 @@ const createListItem = (todo, eventListener) => {
     return _li;
 }
 
-const addEventListener = (callBack) => _handleEventListener = callBack;
+function addEventListener(callBack) { _handleEventListener = callBack; }
 
-const render = (todos) => {
+function render(todos) {
     _list.innerHTML = ' ';
     todos.forEach(element => {
         _list.prepend(creatItem(element));
     });
 }
 
-const renderSingleItem = (todo) => _list.prepend(creatItem(todo))
+function renderSingleItem(todo) { _list.prepend(creatItem(todo)) }
 
-const creatItem = (todo) => {
+function creatItem(todo) {
     return createListItem(todo, (e) => {
         e.todo = todo;
         _handleEventListener(e);
@@ -136,27 +155,9 @@ const creatItem = (todo) => {
     });
 }
 
-const renderEditInput = (item) => {
+function renderEditInput(item) {
     [...item.children].forEach(element => {
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
     })
 }
 
-//=========================== view event listener ====================
-_addButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    const value = { "value": _textField.value, "complete": false };
-    _textField.value = '';
-    e.todo = value;
-    _handleEventListener(e);
-    _textField.focus();
-})
-
-_buttons.addEventListener('click', (e) => {
-    e.preventDefault();
-    _handleEventListener(e);
-})
-
-//================================ view API ===========================
-
-export default { render, renderSingleItem, addEventListener };

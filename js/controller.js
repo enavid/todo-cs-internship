@@ -1,21 +1,6 @@
 import _model from './model.js'
 import _view from './view.js'
 
-// =============================== Define control function =====================
-
-const toggleComplete = (todo) => todo.complete = !todo.complete;
-
-const updateItem = (todo, update) => checkIterative(update) ? alert(update + ' item is exist !') : todo.value = update;
-
-const checkIterative = (value) => _model.getTodos().find((data) => data.value === value)
-
-const removeItem = (todo) => _model.removeItem(todo);
-
-const filterItem = (state, todos) => {
-    return state === 'All' ? todos :
-        state === 'Active' ? todos.filter(item => !item.complete) : todos.filter(item => item.complete);
-}
-
 //=========================== control event listener ====================
 
 _view.addEventListener((e) => {
@@ -49,4 +34,26 @@ _view.addEventListener((e) => {
     if (event === 'Complete') return _view.render(filterItem(event, _model.getTodos()));
 
 });
+
+// =============================== Define control function =====================
+
+function toggleComplete(todo) {
+    todo.complete = !todo.complete;
+}
+function updateItem(todo, update) {
+    checkIterative(update) ? alert(update + ' item is exist !') : todo.value = update;
+}
+
+function checkIterative(value) {
+    _model.getTodos().find((data) => data.value === value);
+}
+
+function removeItem(todo) {
+    _model.removeItem(todo);
+}
+
+function filterItem(state, todos) {
+    return state === 'All' ? todos :
+        state === 'Active' ? todos.filter(item => !item.complete) : todos.filter(item => item.complete);
+}
 

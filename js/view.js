@@ -50,104 +50,88 @@ function renderEditInput(item) {
 
 function creatItem(todo) {
 
-    const _li = createLi();
-    const _editInput = editInput(todo);
-    const _getInput = getInput(todo);
+    const create = document.createElement.bind(document);
+    const li = create('li');
 
-    _li.appendChild(_editInput);
-    _li.appendChild(_getInput);
+    // create input section 
+    const todoText = create('p');
+    const trash = create('img');
+    const span1 = create('span');
+    const span2 = create('span');
+    const checkbox = create('input');
+    const penEditButton = create('i');
+    const getInput = create('span');
 
-    // =============================== Define function =====================
-    function createLi() {
-        const create = document.createElement.bind(document);
-        const li = create('li');
-        return li;
-    }
+    span1.setAttribute('id', 'ul-1');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('value', 'checkBox');
+    checkbox.checked = todo.complete;
+    checkbox.addEventListener('click', (e) => {
+        if (_eventHandler['checkBox']) _eventHandler['checkBox'](todo);
+    });
 
-    function getInput(todo) {
-        const create = document.createElement.bind(document);
-        const todoText = create('p');
-        const trash = create('img');
-        const span1 = create('span');
-        const span2 = create('span');
-        const checkbox = create('input');
-        const penEditButton = create('i');
-        const getInput = create('span');
+    span1.appendChild(checkbox);
+    todoText.innerHTML = todo.value;
+    todoText.className = todo.complete ? 'complete' : 'incomplete';
+    span1.appendChild(todoText);
+    getInput.appendChild(span1);
+    getInput.setAttribute('id', 'getInput');
 
-        span1.setAttribute('id', 'ul-1');
-        checkbox.setAttribute('type', 'checkbox');
-        checkbox.setAttribute('value', 'checkBox');
-        checkbox.checked = todo.complete;
-        checkbox.addEventListener('click', (e) => {
-            if (_eventHandler['checkBox']) _eventHandler['checkBox'](todo);
-        });
+    span2.setAttribute('id', 'ul-2');
+    trash.setAttribute('src', './public/icon/trash.png');
+    trash.setAttribute('alt', 'trash');
+    trash.setAttribute('value', 'trash');
+    trash.addEventListener('click', (e) => {
+        if (_eventHandler['trash']) _eventHandler['trash'](e);
+    })
 
-        span1.appendChild(checkbox);
-        todoText.innerHTML = todo.value;
-        todoText.className = todo.complete ? 'complete' : 'incomplete';
-        span1.appendChild(todoText);
-        getInput.appendChild(span1);
-        getInput.setAttribute('id', 'getInput');
+    penEditButton.className = "fa fa-pencil";
+    penEditButton.setAttribute('value', 'penEdit');
+    penEditButton.addEventListener('click', (e) => {
+        renderEditInput(li)
+    })
 
-        span2.setAttribute('id', 'ul-2');
-        trash.setAttribute('src', './public/icon/trash.png');
-        trash.setAttribute('alt', 'trash');
-        trash.setAttribute('value', 'trash');
-        trash.addEventListener('click', (e) => {
-            if (_eventHandler['trash']) _eventHandler['trash'](e);
-        })
+    span2.appendChild(penEditButton);
+    span2.appendChild(trash);
+    getInput.appendChild(span2);
 
-        penEditButton.className = "fa fa-pencil";
-        penEditButton.setAttribute('value', 'penEdit');
-        penEditButton.addEventListener('click', (e) => {
-            renderEditInput(_li)
-        })
+    // create edit section
+    const inputEdit = create('input');
+    const checkEditButton = create('p');
+    const closeEditButton = create('p');
+    const confirmSpan = create('span');
+    const editSpan = create('span');
 
-        span2.appendChild(penEditButton);
-        span2.appendChild(trash);
-        getInput.appendChild(span2);
+    editSpan.id = 'edit';
+    checkEditButton.innerHTML = "&#10004;";
+    checkEditButton.setAttribute('value', 'check');
+    checkEditButton.addEventListener('click', (e) => {
+        const event = { todo, 'update': inputEdit.value };
+        if (_eventHandler['check']) _eventHandler['check'](event);
+    })
 
-        return getInput;
-    }
+    closeEditButton.innerHTML = "&#10008;";
+    closeEditButton.setAttribute('value', 'close');
+    closeEditButton.addEventListener('click', (e) => {
+        renderEditInput(li);
+    })
 
-    function editInput(todo) {
-        const create = document.createElement.bind(document);
-        const inputEdit = create('input');
-        const checkEditButton = create('p');
-        const closeEditButton = create('p');
-        const confirmSpan = create('span');
-        const editSpan = create('span');
+    confirmSpan.appendChild(closeEditButton);
+    confirmSpan.appendChild(checkEditButton);
+    confirmSpan.id = 'confirmEdit';
 
-        editSpan.id = 'edit';
-        checkEditButton.innerHTML = "&#10004;";
-        checkEditButton.setAttribute('value', 'check');
-        checkEditButton.addEventListener('click', (e) => {
-            const event = { todo, 'update': inputEdit.value };
-            if (_eventHandler['check']) _eventHandler['check'](event);
-        })
+    inputEdit.className = 'inputEdit';
+    inputEdit.value = todo.value;
 
-        closeEditButton.innerHTML = "&#10008;";
-        closeEditButton.setAttribute('value', 'close');
-        closeEditButton.addEventListener('click', (e) => {
-            console.log(_li)
-            renderEditInput(_li);
-        })
+    editSpan.appendChild(inputEdit);
+    editSpan.appendChild(confirmSpan);
+    editSpan.style.display = 'none';
 
-        confirmSpan.appendChild(closeEditButton);
-        confirmSpan.appendChild(checkEditButton);
-        confirmSpan.id = 'confirmEdit';
 
-        inputEdit.className = 'inputEdit';
-        inputEdit.value = todo.value;
-
-        editSpan.appendChild(inputEdit);
-        editSpan.appendChild(confirmSpan);
-        editSpan.style.display = 'none';
-
-        return editSpan;
-    }
+    li.appendChild(editSpan);
+    li.appendChild(getInput);
 
     //================================ Module AIP===========================
-    return _li;
+    return li;
 }
 

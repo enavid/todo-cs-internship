@@ -9,16 +9,12 @@ const _eventHandler = {};
 
 export default { render, renderSingleItem, addEventListener };
 
-
-function addEventListener(option, callBack) { _eventHandler[option] = callBack; }
-
 //=========================== view event listener ====================
 _addButton.addEventListener('click', (e) => {
     e.preventDefault();
     const value = { "value": _textField.value, "complete": false };
     _textField.value = '';
-    e.todo = value;
-    if (_eventHandler['addButton']) _eventHandler['addButton'](e);
+    if (_eventHandler['addButton']) _eventHandler['addButton'](value);
     _textField.focus();
 
 })
@@ -33,6 +29,7 @@ _buttons.addEventListener('click', (e) => {
 
 //=========================== Define view function ===================
 
+function addEventListener(option, callBack) { _eventHandler[option] = callBack; }
 
 function render(todos) {
     _list.innerHTML = ' ';
@@ -45,42 +42,17 @@ function renderSingleItem(todo) {
     _list.prepend(creatItem(todo))
 }
 
-function creatItem(todo) {
-    return createListItem(todo, (e) => {
-        e.todo = todo;
-        const event = e.target.getAttribute('value');
-        if (event === 'checkBox' && _eventHandler['checkBox']) _eventHandler['checkBox'](e);
-        if (event === 'trash' && _eventHandler['trash']) _eventHandler['trash'](e);
-        if (event === 'check' && _eventHandler['check']) _eventHandler['check'](e);
-
-        if (event === 'checkBox') return e.todoText.className = todo.complete ? 'complete' : 'incomplete';
-
-        if (event === 'penEdit') return renderEditInput(e.li);
-
-        if (event === 'close') return renderEditInput(e.li);
-    });
-}
-
 function renderEditInput(item) {
     [...item.children].forEach(element => {
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
     })
 }
 
+function creatItem(todo) {
 
-
-function createListItem(todo, eventListener) {
-
-    const _eventHandler = {};
     const _li = createLi();
-    const _editInput = editInput(todo, (e) => {
-        e.li = _li;
-        eventListener(e);
-    });
-    const _getInput = getInput(todo, (e) => {
-        e.li = _li;
-        eventListener(e);
-    });
+    const _editInput = editInput(todo);
+    const _getInput = getInput(todo);
 
     _li.appendChild(_editInput);
     _li.appendChild(_getInput);
@@ -92,7 +64,7 @@ function createListItem(todo, eventListener) {
         return li;
     }
 
-    function getInput(todo, eventListener) {
+    function getInput(todo) {
         const create = document.createElement.bind(document);
         const todoText = create('p');
         const trash = create('img');
@@ -107,8 +79,7 @@ function createListItem(todo, eventListener) {
         checkbox.setAttribute('value', 'checkBox');
         checkbox.checked = todo.complete;
         checkbox.addEventListener('click', (e) => {
-            e.todoText = todoText;
-            eventListener(e);
+            if (_eventHandler['checkBox']) _eventHandler['checkBox'](todo);
         });
 
         span1.appendChild(checkbox);
@@ -123,13 +94,13 @@ function createListItem(todo, eventListener) {
         trash.setAttribute('alt', 'trash');
         trash.setAttribute('value', 'trash');
         trash.addEventListener('click', (e) => {
-            eventListener(e);
+            if (_eventHandler['trash']) _eventHandler['trash'](e);
         })
 
         penEditButton.className = "fa fa-pencil";
         penEditButton.setAttribute('value', 'penEdit');
         penEditButton.addEventListener('click', (e) => {
-            eventListener(e);
+            renderEditInput(_li)
         })
 
         span2.appendChild(penEditButton);
@@ -139,7 +110,7 @@ function createListItem(todo, eventListener) {
         return getInput;
     }
 
-    function editInput(todo, eventListener) {
+    function editInput(todo) {
         const create = document.createElement.bind(document);
         const inputEdit = create('input');
         const checkEditButton = create('p');
@@ -150,18 +121,21 @@ function createListItem(todo, eventListener) {
         editSpan.id = 'edit';
         checkEditButton.innerHTML = "&#10004;";
         checkEditButton.setAttribute('value', 'check');
+        checkEditButton.addEventListener('click', (e) => {
+            const event = { todo, 'update': inputEdit.value };
+            if (_eventHandler['check']) _eventHandler['check'](event);
+        })
+
         closeEditButton.innerHTML = "&#10008;";
         closeEditButton.setAttribute('value', 'close');
+        closeEditButton.addEventListener('click', (e) => {
+            console.log(_li)
+            renderEditInput(_li);
+        })
 
         confirmSpan.appendChild(closeEditButton);
         confirmSpan.appendChild(checkEditButton);
         confirmSpan.id = 'confirmEdit';
-
-        confirmSpan.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.inputEdit = inputEdit;
-            eventListener(e);
-        })
 
         inputEdit.className = 'inputEdit';
         inputEdit.value = todo.value;

@@ -3,11 +3,11 @@ import _view from './view.js'
 
 //=========================== control event listener ====================
 
-_view.addEventListener('addButton', (e) => {
-    if (e.todo.value === '') return alert('Please enter valid input!');
-    if (checkIterative(e.todo.value)) return alert(e.todo.value + ' Item is exist !');
-    _model.push(e.todo)
-    _view.renderSingleItem(e.todo);
+_view.addEventListener('addButton', (todo) => {
+    if (todo.value === '') return alert('Please enter valid input!');
+    if (checkIterative(todo.value)) return alert(todo.value + ' Item is exist !');
+    _model.push(todo)
+    _view.renderSingleItem(todo);
 })
 
 _view.addEventListener('trash', (e) => {
@@ -15,7 +15,10 @@ _view.addEventListener('trash', (e) => {
     _view.render(_model);
 })
 
-_view.addEventListener('checkBox', (e) => e.todo.complete = !e.todo.complete)
+_view.addEventListener('checkBox', (todo) => {
+    todo.complete = !todo.complete;
+    _view.render(_model);
+})
 
 _view.addEventListener('allButton', (e) => _view.render(filterItem('All', _model)))
 
@@ -24,16 +27,12 @@ _view.addEventListener('activeButton', (e) => _view.render(filterItem('Active', 
 _view.addEventListener('completeButton', (e) => _view.render(filterItem('Complete', _model)))
 
 _view.addEventListener('check', (e) => {
-    if (e.inputEdit.value === '') return alert('Please enter valid input!');
-    updateItem(e.todo, e.inputEdit.value);
+    if (e.update === '') return alert('Please enter valid input!');
+    checkIterative(e.update) ? alert(e.update + ' item is exist !') : e.todo.value = e.update;
     _view.render(_model);
 });
 
 // =============================== Define control function =====================
-
-function updateItem(todo, update) {
-    checkIterative(update) ? alert(update + ' item is exist !') : todo.value = update;
-}
 
 function checkIterative(value) {
     return _model.find((data) => data.value === value);

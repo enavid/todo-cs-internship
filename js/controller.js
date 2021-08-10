@@ -3,53 +3,40 @@ import _view from './view.js'
 
 //=========================== control event listener ====================
 
-_view.addEventListener((e) => {
-    const event = e.target.getAttribute('value');
+_view.addEventListener('addButton', (e) => {
+    if (e.todo.value === '') return alert('Please enter valid input!');
+    if (checkIterative(e.todo.value)) return alert(e.todo.value + ' Item is exist !');
+    _model.push(e.todo)
+    _view.renderSingleItem(e.todo);
+})
 
-    if (event === 'Add') {
-        if (e.todo.value === '') return alert('Please enter valid input!');
+_view.addEventListener('trash', (e) => {
+    _model.splice(_model.indexOf(e.todo), 1);
+    _view.render(_model);
+})
 
-        if (checkIterative(e.todo.value)) {
-            alert(e.todo.value + ' Item is exist !');
-        } else {
-            _model.push(e.todo)
-            _view.renderSingleItem(e.todo);
-        }
-    };
+_view.addEventListener('checkBox', (e) => e.todo.complete = !e.todo.complete)
 
-    if (event === 'checkBox') return toggleComplete(e.todo);
+_view.addEventListener('allButton', (e) => _view.render(filterItem('All', _model)))
 
-    if (event === 'trash') return removeItem(e.todo), _view.render(_model);
+_view.addEventListener('activeButton', (e) => _view.render(filterItem('Active', _model)))
 
-    if (event === 'check') {
-        if (e.inputEdit.value === '') return alert('Please enter valid input!');
-        updateItem(e.todo, e.inputEdit.value);
-        _view.render(_model)
-    }
+_view.addEventListener('completeButton', (e) => _view.render(filterItem('Complete', _model)))
 
-    if (event === 'All') return _view.render(filterItem(event, _model));
-
-    if (event === 'Active') return _view.render(filterItem(event, _model));
-
-    if (event === 'Complete') return _view.render(filterItem(event, _model));
-
+_view.addEventListener('check', (e) => {
+    if (e.inputEdit.value === '') return alert('Please enter valid input!');
+    updateItem(e.todo, e.inputEdit.value);
+    _view.render(_model);
 });
 
 // =============================== Define control function =====================
 
-function toggleComplete(todo) {
-    todo.complete = !todo.complete;
-}
 function updateItem(todo, update) {
     checkIterative(update) ? alert(update + ' item is exist !') : todo.value = update;
 }
 
 function checkIterative(value) {
-    _model.find((data) => data.value === value);
-}
-
-function removeItem(todo) {
-    _model.splice(_todos.indexOf(todo), 1);
+    return _model.find((data) => data.value === value);
 }
 
 function filterItem(state, todos) {

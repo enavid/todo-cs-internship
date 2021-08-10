@@ -14,9 +14,8 @@ _addButton.addEventListener('click', (e) => {
     e.preventDefault();
     const value = { "value": _textField.value, "complete": false };
     _textField.value = '';
-    if (_eventHandler['addButton']) _eventHandler['addButton'](value);
     _textField.focus();
-
+    if (_eventHandler['addButton']) _eventHandler['addButton'](value);
 })
 
 _buttons.addEventListener('click', (e) => {
@@ -29,13 +28,13 @@ _buttons.addEventListener('click', (e) => {
 
 //=========================== Define view function ===================
 
-function addEventListener(option, callBack) { _eventHandler[option] = callBack; }
+function addEventListener(option, callBack) {
+    _eventHandler[option] = callBack;
+}
 
 function render(todos) {
     _list.innerHTML = ' ';
-    todos.forEach(element => {
-        _list.prepend(creatItem(element));
-    });
+    todos.forEach(element => _list.prepend(creatItem(element)));
 }
 
 function renderSingleItem(todo) {
@@ -66,7 +65,7 @@ function creatItem(todo) {
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('value', 'checkBox');
     checkbox.checked = todo.complete;
-    checkbox.addEventListener('click', (e) => {
+    checkbox.addEventListener('click', () => {
         if (_eventHandler['checkBox']) _eventHandler['checkBox'](todo);
     });
 
@@ -81,14 +80,14 @@ function creatItem(todo) {
     trash.setAttribute('src', './public/icon/trash.png');
     trash.setAttribute('alt', 'trash');
     trash.setAttribute('value', 'trash');
-    trash.addEventListener('click', (e) => {
-        if (_eventHandler['trash']) _eventHandler['trash'](e);
+    trash.addEventListener('click', () => {
+        if (_eventHandler['trash']) _eventHandler['trash'](todo);
     })
 
     penEditButton.className = "fa fa-pencil";
     penEditButton.setAttribute('value', 'penEdit');
-    penEditButton.addEventListener('click', (e) => {
-        renderEditInput(li)
+    penEditButton.addEventListener('click', () => {
+        renderEditInput(li);
     })
 
     span2.appendChild(penEditButton);
@@ -105,14 +104,14 @@ function creatItem(todo) {
     editSpan.id = 'edit';
     checkEditButton.innerHTML = "&#10004;";
     checkEditButton.setAttribute('value', 'check');
-    checkEditButton.addEventListener('click', (e) => {
+    checkEditButton.addEventListener('click', () => {
         const event = { todo, 'update': inputEdit.value };
         if (_eventHandler['check']) _eventHandler['check'](event);
     })
 
     closeEditButton.innerHTML = "&#10008;";
     closeEditButton.setAttribute('value', 'close');
-    closeEditButton.addEventListener('click', (e) => {
+    closeEditButton.addEventListener('click', () => {
         renderEditInput(li);
     })
 
@@ -126,7 +125,6 @@ function creatItem(todo) {
     editSpan.appendChild(inputEdit);
     editSpan.appendChild(confirmSpan);
     editSpan.style.display = 'none';
-
 
     li.appendChild(editSpan);
     li.appendChild(getInput);

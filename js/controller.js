@@ -8,29 +8,29 @@ _view.addEventListener('addButton', (todo) => {
     if (checkIterative(todo.value)) return alert(todo.value + ' Item is exist !');
     _model.push(todo)
     _view.renderSingleItem(todo);
-})
+});
 
-_view.addEventListener('trash', (e) => {
-    _model.splice(_model.indexOf(e.todo), 1);
+_view.addEventListener('trash', (todo) => {
+    _model.splice(_model.indexOf(todo), 1);
     _view.render(_model);
-})
+});
 
 _view.addEventListener('checkBox', (todo) => {
     todo.complete = !todo.complete;
     _view.render(_model);
-})
+});
 
-_view.addEventListener('allButton', (e) => _view.render(filterItem('All', _model)))
-
-_view.addEventListener('activeButton', (e) => _view.render(filterItem('Active', _model)))
-
-_view.addEventListener('completeButton', (e) => _view.render(filterItem('Complete', _model)))
-
-_view.addEventListener('check', (e) => {
-    if (e.update === '') return alert('Please enter valid input!');
-    checkIterative(e.update) ? alert(e.update + ' item is exist !') : e.todo.value = e.update;
+_view.addEventListener('check', (data) => {
+    if (data.update === '') return alert('Please enter valid input!');
+    checkIterative(data.update) ? alert(data.update + ' item is exist !') : data.todo.value = data.update;
     _view.render(_model);
 });
+
+_view.addEventListener('allButton', () => _view.render(filterItem('All', _model)));
+
+_view.addEventListener('activeButton', () => _view.render(filterItem('Active', _model)));
+
+_view.addEventListener('completeButton', () => _view.render(filterItem('Complete', _model)));
 
 // =============================== Define control function =====================
 

@@ -1,4 +1,5 @@
-const readFile = require('./utils/readFile');
+const { readFile } = require('./utils/readFile');
+const _model = require('./model');
 
 function staticFiles(req, res) {
     const url = req.url === '/' ? '/index.html' : req.url;
@@ -12,10 +13,18 @@ function staticFiles(req, res) {
         }
 
         if (req.url.includes('js')) res.setHeader('Content-Type', 'application/javascript');
+        if (req.url.includes('css')) res.setHeader('Content-Type', 'text/css');
+        if (req.url.includes('html')) res.setHeader('Content-Type', 'text/html');
         res.writeHead(200);
         res.write(data);
         res.end();
     });
 }
 
-module.exports = { staticFiles };
+function getTodos(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(_model));
+}
+
+module.exports = { staticFiles, getTodos };
+

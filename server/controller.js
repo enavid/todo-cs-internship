@@ -30,17 +30,17 @@ function getTodos(req, res) {
     res.end(JSON.stringify(_model));
 }
 
-function postTodos(request, response) {
+function postTodos(req, res) {
     var dataBuffer = [];
 
-    request.on('data', (chunk) => {
+    req.on('data', (chunk) => {
         dataBuffer = dataBuffer + chunk;
     });
 
-    request.on('end', () => {
+    req.on('end', () => {
         fs.writeFile(todosPath, dataBuffer, () => {
-            response.writeHead(200, { 'Content-Type': 'text/json' });
-            response.end();
+            res.writeHead(200, { 'Content-Type': 'text/json' });
+            res.end();
         });
 
     });

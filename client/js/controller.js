@@ -8,7 +8,6 @@ _view.addEventListener('addButton', (todo) => {
     if (checkIterative(todo.value)) return alert(todo.value + ' Item is exist !');
     _model.push(todo)
     _view.renderSingleItem(todo);
-    console.log(_model)
 });
 
 _view.addEventListener('trash', (todo) => {
@@ -33,6 +32,15 @@ _view.addEventListener('activeButton', () => _view.render(filterItem('Active', _
 
 _view.addEventListener('completeButton', () => _view.render(filterItem('Complete', _model)));
 
+_view.addEventListener('download', () => {
+    console.log('navid')
+    fetch('/todos')
+        .then(response => response.json())
+        .then(data => {
+            _model.push(...data);
+            _view.render(_model);
+        });
+})
 // =============================== Define control function =====================
 
 function checkIterative(value) {

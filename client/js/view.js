@@ -25,7 +25,7 @@ _buttons.addEventListener('click', (e) => {
     if (event === 'Active' && _eventHandler['activeButton']) _eventHandler['activeButton'](e);
     if (event === 'Complete' && _eventHandler['completeButton']) _eventHandler['completeButton'](e);
     if (event === 'Upload') return upload();
-    if (event === 'Download') return download();
+    if (event === 'Download' && _eventHandler['download']) _eventHandler['download']();
 })
 
 //=========================== Define view function ===================
@@ -137,12 +137,6 @@ function creatItem(todo) {
 
 function upload() {
     console.log('upload')
+}
 
-}
-function download() {
-    console.log('download')
-    fetch('/todos')
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
 

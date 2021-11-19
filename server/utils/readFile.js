@@ -8,4 +8,4 @@ function readFile(url, func) {
     fs.readFile(filePath, func);
 }
 
-module.exports = readFile;
+module.exports = { readFile };

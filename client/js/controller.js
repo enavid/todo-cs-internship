@@ -33,13 +33,22 @@ _view.addEventListener('activeButton', () => _view.render(filterItem('Active', _
 _view.addEventListener('completeButton', () => _view.render(filterItem('Complete', _model)));
 
 _view.addEventListener('download', () => {
-    console.log('navid')
     fetch('/todos')
         .then(response => response.json())
         .then(data => {
             _model.push(...data);
             _view.render(_model);
         });
+})
+
+_view.addEventListener('upload', () => {
+    console.log('upload')
+    fetch('/todos', {
+        method: 'POST',
+        body: JSON.stringify(_model),
+        headers: { 'Content-Type': 'application/json', },
+    })
+        .then(response => console.log(response))
 })
 // =============================== Define control function =====================
 

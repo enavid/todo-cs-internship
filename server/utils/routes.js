@@ -10,4 +10,8 @@ function get(url, func, { req, res }) {
     if (req.method === 'GET' && req.url === url) func(req, res);;
 }
 
-module.exports = { static, get };
+function post(url, func, { req, res }) {
+    if (req.method === 'POST' && req.url === url) func(req, res);;
+}
+
+module.exports = { static, get, post };

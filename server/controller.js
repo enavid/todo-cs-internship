@@ -1,6 +1,11 @@
 const { readFile } = require('./utils/readFile');
 const _model = require('./model');
 
+const fs = require('fs');
+const path = require('path');
+
+const todosPath = path.join(__dirname, '/todos.json')
+
 function staticFiles(req, res) {
     const url = req.url === '/' ? '/index.html' : req.url;
 
@@ -26,5 +31,21 @@ function getTodos(req, res) {
     res.end(JSON.stringify(_model));
 }
 
-module.exports = { staticFiles, getTodos };
+function postTodos(request, response) {
+    var dataBuffer = [];
+
+    request.on('data', (chunk) => {
+        dataBuffer = dataBuffer + chunk;
+    });
+
+    request.on('end', () => {
+        fs.writeFile(todosPath, dataBuffer, () => {
+            response.writeHead(200, { 'Content-Type': 'text/json' });
+            response.end();
+        });
+
+    });
+}
+
+module.exports = { staticFiles, getTodos, postTodos };
 

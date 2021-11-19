@@ -8,6 +8,7 @@ const PORT = 3000;
 server.on('request', (req, res) => {
     routes.static(controller.staticFiles, { req, res });
     routes.get('/todos', controller.getTodos, { req, res });
+    routes.post('/todos', controller.postTodos, { req, res });
 })
 
 server.listen(PORT, () => {

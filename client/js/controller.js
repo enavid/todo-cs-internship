@@ -8,6 +8,7 @@ _view.addEventListener('addButton', (todo) => {
     if (checkIterative(todo.value)) return alert(todo.value + ' Item is exist !');
     _model.push(todo)
     _view.renderSingleItem(todo);
+    console.log(_model)
 });
 
 _view.addEventListener('trash', (todo) => {

@@ -24,6 +24,8 @@ _buttons.addEventListener('click', (e) => {
     if (event === 'All' && _eventHandler['allButton']) _eventHandler['allButton'](e);
     if (event === 'Active' && _eventHandler['activeButton']) _eventHandler['activeButton'](e);
     if (event === 'Complete' && _eventHandler['completeButton']) _eventHandler['completeButton'](e);
+    if (event === 'Upload') return upload();
+    if (event === 'Download') return download();
 })
 
 //=========================== Define view function ===================
@@ -131,5 +133,12 @@ function creatItem(todo) {
 
     //================================ Module AIP===========================
     return li;
+}
+
+function upload() {
+    console.log('upload')
+}
+function download() {
+    console.log('download')
 }
 

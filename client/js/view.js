@@ -137,8 +137,12 @@ function creatItem(todo) {
 
 function upload() {
     console.log('upload')
+
 }
 function download() {
     console.log('download')
+    fetch('/todos')
+        .then(response => response.json())
+        .then(data => console.log(data));
 }
 

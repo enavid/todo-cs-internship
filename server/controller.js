@@ -1,10 +1,9 @@
 const { readFile } = require('./utils/readFile');
 const _model = require('./model');
-
 const fs = require('fs');
 const path = require('path');
 
-const todosPath = path.join(__dirname, '/todos.json')
+const todosPath = path.join(__dirname, '/model.json')
 
 function staticFiles(req, res) {
     const url = req.url === '/' ? '/index.html' : req.url;

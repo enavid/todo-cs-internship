@@ -1,9 +1,9 @@
+import _controller from './controller.js';
 const _get = document.getElementById.bind(document);
 const _addButton = _get('addButton');
 const _textField = _get('textField');
 const _list = _get('list');
 const _buttons = _get('buttons');
-const _eventHandler = {};
 
 //================================ view API ===========================
 
@@ -15,24 +15,21 @@ _addButton.addEventListener('click', (e) => {
     const value = { "value": _textField.value, "complete": false };
     _textField.value = '';
     _textField.focus();
-    if (_eventHandler['addButton']) _eventHandler['addButton'](value);
+    _controller.addButton(value);
 })
 
 _buttons.addEventListener('click', (e) => {
     e.preventDefault();
     const event = e.target.getAttribute('value');
-    if (event === 'All' && _eventHandler['allButton']) _eventHandler['allButton'](e);
-    if (event === 'Active' && _eventHandler['activeButton']) _eventHandler['activeButton'](e);
-    if (event === 'Complete' && _eventHandler['completeButton']) _eventHandler['completeButton'](e);
-    if (event === 'Upload' && _eventHandler['upload']) _eventHandler['upload']();
-    if (event === 'Download' && _eventHandler['download']) _eventHandler['download']();
+
+    if (event === 'All') return _controller.allButton(e);
+    if (event === 'Active') return _controller.activeButton(e);
+    if (event === 'Complete') return _controller.completeButton(e);
+    if (event === 'Upload') return _controller.upload();
+    if (event === 'Download') return _controller.download();
 })
 
 //=========================== Define view function ===================
-
-function addEventListener(option, callBack) {
-    _eventHandler[option] = callBack;
-}
 
 function render(todos) {
     _list.innerHTML = ' ';
@@ -68,7 +65,7 @@ function creatItem(todo) {
     checkbox.setAttribute('value', 'checkBox');
     checkbox.checked = todo.complete;
     checkbox.addEventListener('click', () => {
-        if (_eventHandler['checkBox']) _eventHandler['checkBox'](todo);
+        _controller.checkBox(todo);
     });
 
     span1.appendChild(checkbox);
@@ -83,7 +80,7 @@ function creatItem(todo) {
     trash.setAttribute('alt', 'trash');
     trash.setAttribute('value', 'trash');
     trash.addEventListener('click', () => {
-        if (_eventHandler['trash']) _eventHandler['trash'](todo);
+        _controller.trash(todo);
     })
 
     penEditButton.className = "fa fa-pencil";
@@ -108,7 +105,7 @@ function creatItem(todo) {
     checkEditButton.setAttribute('value', 'check');
     checkEditButton.addEventListener('click', () => {
         const event = { todo, 'update': inputEdit.value };
-        if (_eventHandler['check']) _eventHandler['check'](event);
+        _controller.check(event);
     })
 
     closeEditButton.innerHTML = "&#10008;";

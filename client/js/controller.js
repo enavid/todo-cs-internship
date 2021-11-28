@@ -6,23 +6,27 @@ import _view from './view.js'
 _view.addEventListener('addButton', (todo) => {
     if (todo.value === '') return alert('Please enter valid input!');
     if (checkIterative(todo.value)) return alert(todo.value + ' Item is exist !');
-    _model.push(todo)
+    _model.push(todo);
+    writeToLocalStorage(_model);
     _view.renderSingleItem(todo);
 });
 
 _view.addEventListener('trash', (todo) => {
     _model.splice(_model.indexOf(todo), 1);
+    writeToLocalStorage(_model);
     _view.render(_model);
 });
 
 _view.addEventListener('checkBox', (todo) => {
     todo.complete = !todo.complete;
+    writeToLocalStorage(_model);
     _view.render(_model);
 });
 
 _view.addEventListener('check', (data) => {
     if (data.update === '') return alert('Please enter valid input!');
     checkIterative(data.update) ? alert(data.update + ' item is exist !') : data.todo.value = data.update;
+    writeToLocalStorage(_model);
     _view.render(_model);
 });
 
@@ -37,6 +41,7 @@ _view.addEventListener('download', () => {
         .then(response => response.json())
         .then(data => {
             _model.push(...data);
+            writeToLocalStorage(_model);
             _view.render(_model);
         });
 })
@@ -61,4 +66,16 @@ function filterItem(state, todos) {
         state === 'Active' ? todos.filter(item => !item.complete) : todos.filter(item => item.complete);
 }
 
+function writeToLocalStorage(model) {
+    console.log(model)
+    localStorage.setItem('model', JSON.stringify(model));
+}
+
+(function checkLocalStorage() {
+    const model = JSON.parse(localStorage.getItem('model'));
+    if (model) {
+        _model.push(...model);
+        _view.render(_model);
+    }
+})()
 

@@ -1,5 +1,4 @@
 const { readFile } = require('./utils/readFile');
-const _model = require('./model');
 const fs = require('fs');
 const path = require('path');
 
@@ -27,7 +26,17 @@ function staticFiles(req, res) {
 
 function getTodos(req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(_model));
+    fs.readFile(todosPath, (error, data) => {
+        if (error) {
+            res.write('[]')
+            res.end();
+        } else {
+            res.writeHead(200);
+            res.write(data);
+            res.end();
+        }
+    })
+    // res.end(JSON.stringify(_model));
 }
 
 function postTodos(req, res) {

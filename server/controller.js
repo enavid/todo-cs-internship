@@ -1,5 +1,5 @@
 const { readFile } = require('./utils/readFile');
-// const _model = require('./model');
+const _model = require('./model');
 const fs = require('fs');
 const path = require('path');
 

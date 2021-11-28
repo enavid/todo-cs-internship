@@ -47,7 +47,6 @@ _view.addEventListener('download', () => {
 })
 
 _view.addEventListener('upload', () => {
-    console.log('upload')
     fetch('/todos', {
         method: 'POST',
         body: JSON.stringify(_model),
@@ -67,7 +66,6 @@ function filterItem(state, todos) {
 }
 
 function writeToLocalStorage(model) {
-    console.log(model)
     localStorage.setItem('model', JSON.stringify(model));
 }
 

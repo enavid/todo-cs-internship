@@ -43,8 +43,16 @@ _view.addEventListener('download', () => {
         fetch('/todos')
             .then(response => response.json())
             .then(data => {
-                _model.push(...data);
-                writeToLocalStorage(_model);
+
+                const result = data.filter((item) => {
+                    return _model.includes(item)
+                })
+                if (result.length > 0) {
+                    console.log(result)
+                    _model.push(result);
+                    writeToLocalStorage(result);
+                }
+
                 _view.render(_model);
             });
     }
@@ -80,7 +88,6 @@ function writeToLocalStorage(model) {
     const model = JSON.parse(localStorage.getItem('model'));
     if (model) {
         _model.push(...model);
-        _view.render(_model);
     }
 })()
 

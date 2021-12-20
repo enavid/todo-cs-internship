@@ -37,22 +37,29 @@ _view.addEventListener('activeButton', () => _view.render(filterItem('Active', _
 _view.addEventListener('completeButton', () => _view.render(filterItem('Complete', _model)));
 
 _view.addEventListener('download', () => {
-    fetch('/todos')
-        .then(response => response.json())
-        .then(data => {
-            _model.push(...data);
-            writeToLocalStorage(_model);
-            _view.render(_model);
-        });
+
+    const result = confirm('Download data ?');
+    if (result) {
+        fetch('/todos')
+            .then(response => response.json())
+            .then(data => {
+                _model.push(...data);
+                writeToLocalStorage(_model);
+                _view.render(_model);
+            });
+    }
 })
 
 _view.addEventListener('upload', () => {
-    fetch('/todos', {
-        method: 'POST',
-        body: JSON.stringify(_model),
-        headers: { 'Content-Type': 'application/json', },
-    })
-        .then(response => console.log(response))
+    const result = confirm('Upload data ?');
+    if (result) {
+        fetch('/todos', {
+            method: 'POST',
+            body: JSON.stringify(_model),
+            headers: { 'Content-Type': 'application/json', },
+        })
+            .then(response => console.log(response))
+    }
 })
 // =============================== Define control function =====================
 

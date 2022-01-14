@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
+from .serializer import TodoSerializer
+from .models import Todo
 # Create your views here.
 
 
@@ -14,7 +15,9 @@ def todo(request):
 class TodoAPI(APIView):
 
     def get(self, request):
-        return Response('navids asdeghi', status=status.HTTP_200_OK)
+        todos = Todo.objects.all()
+        serializer = TodoSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         pass

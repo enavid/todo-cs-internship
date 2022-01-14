@@ -43,17 +43,17 @@ _view.addEventListener('download', () => {
         fetch('/todos')
             .then(response => response.json())
             .then(data => {
+                console.log(data)
+                // const result = data.filter((item) => {
+                //     return _model.includes(item)
+                // })
+                // if (result.length > 0) {
+                //     console.log(result)
+                //     _model.push(result);
+                //     writeToLocalStorage(result);
+                // }
 
-                const result = data.filter((item) => {
-                    return _model.includes(item)
-                })
-                if (result.length > 0) {
-                    console.log(result)
-                    _model.push(result);
-                    writeToLocalStorage(result);
-                }
-
-                _view.render(_model);
+                _view.render(data);
             });
     }
 })

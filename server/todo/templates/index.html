@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todoApp</title>
+    <link rel="stylesheet" href="{% static 'public/style/style.css'%}">
+    <link rel="icon" type="img/png" href="{% static 'public/icon/icon.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <p>Add a New Task</p>
+        <form name="todoForm">
+            <input id="textField" type="text" placeholder="Write new task here ...">
+            <input id="addButton" type="submit" value="Add">
+        </form>
+    </header>
+    <main>
+        <section>
+            <ul id="list"></ul>
+        </section>
+        <form id="buttons">
+            <input id="allButton" type="submit" value="All">
+            <input id="activeButton" type="submit" value="Active">
+            <input id="completeButton" type="submit" value="Complete">
+            <input id="downloadButton" type="submit" value="Download">
+            <input id="uploadButton" type="submit" value="Upload">
+        </form>
+    </main>
+    <footer>
+        <p>Todo list application</p>
+        <a href="https://github.com/enavid">Github address</link>
+    </footer>
+    <script type="module" src="{% static 'js/controller.js' %}"></script>
+</body>
+
+</html>

@@ -15,9 +15,20 @@ def todo(request):
 class TodoAPI(APIView):
 
     def get(self, request):
-        todos = Todo.objects.all()
-        serializer = TodoSerializer(todos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            todos = Todo.objects.all()
+            serializer = TodoSerializer(todos, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Todo.DoesNotExist:
+            return Response({'response': 'Bad request'}, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request):
-        pass
+        try:
+            serializer = TodoSerializer(data=request.data, many=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(e)
+            return Response({'response': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

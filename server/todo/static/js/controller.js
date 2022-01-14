@@ -61,7 +61,7 @@ _view.addEventListener('download', () => {
 _view.addEventListener('upload', () => {
     const result = confirm('Upload data ?');
     if (result) {
-        fetch('/todos', {
+        fetch('todos/', {
             method: 'POST',
             body: JSON.stringify(_model),
             headers: { 'Content-Type': 'application/json', },

@@ -9,8 +9,12 @@ server.on('request', (req, res) => {
     routes.static(controller.staticFiles, { req, res });
     routes.get('/todos', controller.getTodos, { req, res });
     routes.post('/todos', controller.postTodos, { req, res });
+
     routes.get('/signin', controller.signin, { req, res });
+    routes.post('/signin', controller.signinHandler, { req, res });
+
     routes.get('/signup', controller.signup, { req, res });
+    routes.post('/signup', controller.signupHandler, { req, res });
 })
 
 server.listen(PORT, () => {

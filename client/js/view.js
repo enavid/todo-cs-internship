@@ -26,6 +26,8 @@ _buttons.addEventListener('click', (e) => {
     if (event === 'Complete' && _eventHandler['completeButton']) _eventHandler['completeButton'](e);
     if (event === 'Upload' && _eventHandler['upload']) _eventHandler['upload']();
     if (event === 'Download' && _eventHandler['download']) _eventHandler['download']();
+    if (event === 'signup' && _eventHandler['signup']) _eventHandler['signup']();
+    if (event === 'signin' && _eventHandler['signin']) _eventHandler['signin']();
 })
 
 //=========================== Define view function ===================

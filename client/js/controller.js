@@ -58,6 +58,14 @@ _view.addEventListener('download', () => {
     }
 })
 
+_view.addEventListener('signin', () => {
+    window.document.location.href = '/signin';
+})
+
+_view.addEventListener('signup', () => {
+    window.document.location.href = '/signup';
+})
+
 _view.addEventListener('upload', () => {
     const result = confirm('Upload data ?');
     if (result) {

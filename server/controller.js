@@ -56,9 +56,27 @@ function postTodos(req, res) {
 }
 
 function signin(req, res) {
-    console.log('navid sadeghi')
-    // res.writeHead(301, { Location: 'http://w3docs.com' });
     const url = req.url === '/signin' ? '/signin.html' : req.url;
+
+    readFile(url, (error, data) => {
+
+        if (error) {
+            res.writeHead(404);
+            res.write('Not found error 404');
+            return res.end()
+        }
+
+        if (req.url.includes('js')) res.setHeader('Content-Type', 'application/javascript');
+        if (req.url.includes('css')) res.setHeader('Content-Type', 'text/css');
+        if (req.url.includes('html')) res.setHeader('Content-Type', 'text/html');
+        res.writeHead(200);
+        res.write(data);
+        res.end();
+    });
+}
+
+function signup(req, res) {
+    const url = req.url === '/signup' ? '/signup.html' : req.url;
 
     readFile(url, (error, data) => {
 
@@ -82,5 +100,6 @@ module.exports = {
     getTodos,
     postTodos,
     signin,
+    signup
 };
 

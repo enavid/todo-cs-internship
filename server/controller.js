@@ -3,6 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const db = require('./model')
 
+//check double username
+// add jwt
+// error handler
+// check return tocke to client in signinHandler function
+
 const todosPath = path.join(__dirname, '/model.json')
 
 function staticFiles(req, res) {
@@ -71,10 +76,53 @@ function signin(req, res) {
         if (req.url.includes('js')) res.setHeader('Content-Type', 'application/javascript');
         if (req.url.includes('css')) res.setHeader('Content-Type', 'text/css');
         if (req.url.includes('html')) res.setHeader('Content-Type', 'text/html');
+
         res.writeHead(200);
         res.write(data);
         res.end();
     });
+}
+
+function signinHandler(req, res) {
+    var data;
+
+    req.on('data', (chunk) => {
+        data = JSON.parse(chunk.toString('utf-8'));
+    });
+
+    req.on('end', () => {
+
+        if (data.username !== '' && data.password !== '') {
+            const username = data.username;
+            const password = data.password;
+            response = {
+                'name': '',
+                'username': '',
+                'status': 'fail',
+                'token': ''
+            }
+
+            db.read_data((data, err) => {
+                data.forEach((element) => {
+                    if (element.username !== username && element.password !== password) return
+
+                    token = makeToken();
+                    element.token = token;
+                    console.log(token)
+
+                    response.name = element.name;
+                    response.username = element.username;
+                    response.status = 'success';
+                    response.token = token;
+                })
+
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(response));
+            });
+
+
+        }
+    })
 }
 
 function signup(req, res) {
@@ -115,24 +163,29 @@ function signupHandler(req, res) {
                 'name': data.name,
                 'username': data.username,
                 'password': data.password,
-                'tocken': 'abcdefg',
+                'token': '',
                 'todos': []
             }
 
             db.read_data((res, err) => {
                 user.id = res.length + 1;
                 res.push(user);
-                db.write_data(res)
-
-
-                db.read_data((res, err) => {
-
-                    console.log(res)
-                });
+                db.write_data(res);
             });
 
         }
     })
+}
+
+function makeToken(length = 40) {
+    var result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 module.exports = {
@@ -140,7 +193,7 @@ module.exports = {
     getTodos,
     postTodos,
     signin,
-
+    signinHandler,
     signup,
     signupHandler,
 };

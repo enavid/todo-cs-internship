@@ -10,10 +10,6 @@ const _username = _get('username');
 _login.addEventListener('click', (e) => {
     e.preventDefault();
 
-    console.log(_password.value)
-    console.log(_username.value)
-
-
     fetch('/signin', {
         method: 'POST',
         body: JSON.stringify({
@@ -23,11 +19,19 @@ _login.addEventListener('click', (e) => {
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         }
-    }).then(function (response) {
-        if (response.ok) {
-            console.log('yessss')
-        }
-    })
+    }).then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log(data.username)
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('name', data.name);
+                localStorage.setItem('username', data.username);
+                return window.document.location.href = '/index.html';
+            }
+            console.log(data.username)
+            window.alert('Login fail :(')
+        });
+
 
 })
 

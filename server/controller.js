@@ -32,6 +32,8 @@ function staticFiles(req, res) {
 
 //Fix this funtion
 function getTodos(req, res) {
+
+    console.log(req.headers.authentication);
     res.setHeader('Content-Type', 'application/json');
     fs.readFile(todosPath, (error, data) => {
         if (error) {
@@ -40,6 +42,7 @@ function getTodos(req, res) {
         } else {
             res.writeHead(200);
             res.write(data);
+            // console.log('navid', data.toString('utf-8'))
             res.end();
         }
     })

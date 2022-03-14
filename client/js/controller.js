@@ -37,25 +37,28 @@ _view.addEventListener('activeButton', () => _view.render(filterItem('Active', _
 _view.addEventListener('completeButton', () => _view.render(filterItem('Complete', _model)));
 
 _view.addEventListener('download', () => {
+    const token = read_token();
+    console.log(token);
+    // const result = confirm('Download data ?');
+    // if (result) {
+    fetch('/todos', {
+        headers: { 'authentication': token },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            // const result = data.filter((item) => {
+            //     return _model.includes(item)
+            // })
+            // if (result.length > 0) {
+            //     console.log(result)
+            //     _model.push(result);
+            //     writeToLocalStorage(result);
+            // }
 
-    const result = confirm('Download data ?');
-    if (result) {
-        fetch('/todos')
-            .then(response => response.json())
-            .then(data => {
-
-                const result = data.filter((item) => {
-                    return _model.includes(item)
-                })
-                if (result.length > 0) {
-                    console.log(result)
-                    _model.push(result);
-                    writeToLocalStorage(result);
-                }
-
-                _view.render(_model);
-            });
-    }
+            // _view.render(_model);
+        });
+    // }
 })
 
 _view.addEventListener('signin', () => {
@@ -90,6 +93,10 @@ function filterItem(state, todos) {
 
 function writeToLocalStorage(model) {
     localStorage.setItem('model', JSON.stringify(model));
+}
+
+function read_token() {
+    return localStorage.getItem('token');
 }
 
 (function checkLocalStorage() {

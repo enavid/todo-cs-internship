@@ -5,12 +5,14 @@ const _list = _get('list');
 const _name = _get('name');
 const _loginButton = _get('login')
 const _logoutButton = _get('logout')
+const _downloadButton = _get('downloadButton')
+const _uploadButton = _get('uploadButton')
 const _buttons = _get('buttons');
 const _eventHandler = {};
 
 //================================ view API ===========================
 
-export default { render, renderSingleItem, addEventListener, setName, changeButton };
+export default { render, renderSingleItem, addEventListener, setName, changeButton, clearView };
 
 //=========================== view event listener ====================
 _addButton.addEventListener('click', (e) => {
@@ -41,8 +43,12 @@ function addEventListener(option, callBack) {
 }
 
 function render(todos) {
-    _list.innerHTML = ' ';
+    clearView();
     todos.forEach(element => _list.prepend(creatItem(element)));
+}
+
+function clearView() {
+    _list.innerHTML = ' ';
 }
 
 function renderSingleItem(todo) {
@@ -146,13 +152,16 @@ function setName(name = 'Guest') {
 }
 
 function changeButton(state) {
-    console.log('navdddddddddddddddddddddd')
     if (state === 'login') {
         _loginButton.style.display = 'none';
         _logoutButton.style.display = 'inline-block';
+        _downloadButton.style.display = 'inline-block';
+        _uploadButton.style.display = 'inline-block';
     }
     else if (state === 'logout') {
         _loginButton.style.display = 'inline-block';
         _logoutButton.style.display = 'none';
+        _downloadButton.style.display = 'none';
+        _uploadButton.style.display = 'none';
     }
 }

@@ -88,6 +88,7 @@ _view.addEventListener('upload', () => {
 })
 
 _view.addEventListener('login', () => {
+    localStorage.clear();
     window.document.location.href = '/signin';
 })
 
@@ -96,11 +97,9 @@ _view.addEventListener('logout', () => {
     const result = window.confirm(name + ' , Do you want to logout ?');
 
     if (result) {
-        localStorage.setItem('token', undefined);
-        localStorage.setItem('status', 'guest');
-        localStorage.setItem('name', undefined);
-        localStorage.setItem('username', undefined);
-
+        localStorage.clear();
+        _model.splice(0, _model.length);
+        _view.clearView();
         _view.setName('Guest');
         _view.changeButton('logout');
     }
@@ -131,15 +130,23 @@ function read_token() {
 
 
 (function checkLocalStorage() {
-    const model = JSON.parse(localStorage.getItem('model'));
+
+    const model = localStorage.getItem('model');
     const status = localStorage.getItem('status');
 
-    if (model) _model.push(...model);
     if (status == 'login') {
         _view.setName(localStorage.getItem('name'));
         _view.changeButton('login')
+        const data = JSON.parse(model)
+        if (data) {
+            _model.push(...data);
+            _view.render(data);
+        }
     }
-    else _view.setName('Guest')
+    else {
+        _view.setName('Guest');
+        _view.changeButton('logout');
+    }
 })()
 
 

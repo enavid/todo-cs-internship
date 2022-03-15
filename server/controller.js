@@ -39,10 +39,7 @@ function postTodos(req, res) {
         if (!status) return redirectToLoginPage(req, res);
 
         req.on('data', chunk => {
-            const todos = JSON.parse(chunk.toString('utf-8'))
-            todos.forEach(element => {
-                user.todos.push(element)
-            })
+            user.todos = JSON.parse(chunk.toString('utf-8'));
             db.write_data(data);
         })
         sendJsonData(req, res, { 'status': true, 'response': 'Todos saved successfully!' })

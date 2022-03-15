@@ -38,38 +38,37 @@ _view.addEventListener('completeButton', () => _view.render(filterItem('Complete
 
 _view.addEventListener('download', () => {
     const token = read_token();
-    // const result = confirm('Download data ?');
-    // if (result) {
-    fetch('/todos', {
-        headers: { 'authentication': token },
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if (data.status) {
-                console.log(data.todos)
-                // const result = data.filter((item) => {
-                //     return _model.includes(item)
-                // })
-                // if (result.length > 0) {
-                //     console.log(result)
-                //     _model.push(result);
-                //     writeToLocalStorage(result);
-                // }
+    const result = confirm('Download data ?');
+    if (result) {
+        fetch('/todos', {
+            headers: { 'authentication': token },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    console.log('Todos download successfully.');
 
-                //  _view.render(_model);
-                return
-            }
-            const result = confirm('You should login first.');
-            if (result) window.document.location.href = data.url;
-        });
+                    const result = data.todos.filter((item) => {
+                        return !_model.includes(item)
+                    })
+
+                    if (result.length > 0) {
+                        result.forEach(element => _model.push(element))
+                        writeToLocalStorage(_model);
+                    }
+                    return _view.render(result);
+
+                }
+                const result = confirm('You should login first.');
+                if (result) window.document.location.href = data.url;
+            });
+    }
 })
 
 _view.addEventListener('upload', () => {
     const result = confirm('Upload data ?');
     if (result) {
         const token = read_token();
-        console.log(_model)
         fetch('/todos', {
             method: 'POST',
             headers: { 'authentication': token, 'Content-Type': 'application/json' },
@@ -78,8 +77,7 @@ _view.addEventListener('upload', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.status) {
-                    console.log(data)
-                    return
+                    return console.log('Todos upolad successfully.')
                 }
                 const result = confirm('You should login first.');
                 if (result) window.document.location.href = data.url;

@@ -1,14 +1,10 @@
 const { readFile } = require('./utils/readFile');
-const fs = require('fs');
-const path = require('path');
 const db = require('./model')
 
 //check double username
 // add jwt
 // error handler
 // check return tocke to client in signinHandler function
-
-const todosPath = path.join(__dirname, '/model.json')
 
 function staticFiles(req, res) {
     const url = req.url === '/' ? '/index.html' : req.url;
@@ -36,18 +32,25 @@ function getTodos(req, res) {
         sendJsonData(req, res, { 'status': true, 'todos': user.todos })
     })
 }
-//Fix this funtion
+
 function postTodos(req, res) {
 
-    authentication(req, res, (status, user) => {
-        console.log(status, user);
+    authentication(req, res, (status, user, data) => {
+        if (!status) return redirectToLoginPage(req, res);
+
+        req.on('data', chunk => {
+            const todos = JSON.parse(chunk.toString('utf-8'))
+            todos.forEach(element => {
+                user.todos.push(element)
+            })
+            db.write_data(data);
+        })
+        sendJsonData(req, res, { 'status': true, 'response': 'Todos saved successfully!' })
     })
 
-    // var dataBuffer = [];
 
-    // req.on('data', (chunk) => {
-    //     dataBuffer = dataBuffer + chunk;
-    // });
+
+
 
     // req.on('end', () => {
     //     fs.writeFile(todosPath, dataBuffer, () => {

@@ -65,6 +65,28 @@ _view.addEventListener('download', () => {
         });
 })
 
+_view.addEventListener('upload', () => {
+    // const result = confirm('Upload data ?');
+    // if (result) {
+    const token = read_token();
+    console.log(_model)
+    fetch('/todos', {
+        method: 'POST',
+        headers: { 'authentication': token, 'Content-Type': 'application/json' },
+        body: JSON.stringify(_model),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status) {
+                console.log(data)
+                return
+            }
+            const result = confirm('You should login first.');
+            if (result) window.document.location.href = data.url;
+        })
+    // }
+})
+
 _view.addEventListener('signin', () => {
     window.document.location.href = '/signin';
 })
@@ -73,17 +95,6 @@ _view.addEventListener('signup', () => {
     window.document.location.href = '/signup';
 })
 
-_view.addEventListener('upload', () => {
-    const result = confirm('Upload data ?');
-    if (result) {
-        fetch('/todos', {
-            method: 'POST',
-            body: JSON.stringify(_model),
-            headers: { 'Content-Type': 'application/json', },
-        })
-            .then(response => console.log(response))
-    }
-})
 // =============================== Define control function =====================
 
 function checkIterative(value) {

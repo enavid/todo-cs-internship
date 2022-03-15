@@ -17,6 +17,7 @@ function write_data(data, callBack) {
     });
 }
 
+
 function checkToken(token, callBack) {
     read_data((data, error) => {
         var status = false;
@@ -24,7 +25,7 @@ function checkToken(token, callBack) {
         data.forEach(element => {
             if (element.token == token) return status = true, user = element;
         })
-        callBack(status, user);
+        callBack(status, user, data);
     });
 }
 

@@ -17,7 +17,19 @@ function write_data(data, callBack) {
     });
 }
 
+function checkToken(token, callBack) {
+    read_data((data, error) => {
+        var status = false;
+        var user;
+        data.forEach(element => {
+            if (element.token == token) return status = true, user = element;
+        })
+        callBack(status, user);
+    });
+}
+
 module.exports = {
     read_data,
     write_data,
+    checkToken,
 };

@@ -30,39 +30,32 @@ function staticFiles(req, res) {
     });
 }
 
-//Fix this funtion
 function getTodos(req, res) {
-
-    console.log(req.headers.authentication);
-    res.setHeader('Content-Type', 'application/json');
-    fs.readFile(todosPath, (error, data) => {
-        if (error) {
-            res.write('[]')
-            res.end();
-        } else {
-            res.writeHead(200);
-            res.write(data);
-            // console.log('navid', data.toString('utf-8'))
-            res.end();
-        }
+    authentication(req, res, (status, user) => {
+        if (!status) return redirectToLoginPage(req, res);
+        sendJsonData(req, res, { 'status': true, 'todos': user.todos })
     })
-    // res.end(JSON.stringify(_model));
 }
 //Fix this funtion
 function postTodos(req, res) {
-    var dataBuffer = [];
 
-    req.on('data', (chunk) => {
-        dataBuffer = dataBuffer + chunk;
-    });
+    authentication(req, res, (status, user) => {
+        console.log(status, user);
+    })
 
-    req.on('end', () => {
-        fs.writeFile(todosPath, dataBuffer, () => {
-            res.writeHead(200, { 'Content-Type': 'text/json' });
-            res.end();
-        });
+    // var dataBuffer = [];
 
-    });
+    // req.on('data', (chunk) => {
+    //     dataBuffer = dataBuffer + chunk;
+    // });
+
+    // req.on('end', () => {
+    //     fs.writeFile(todosPath, dataBuffer, () => {
+    //         res.writeHead(200, { 'Content-Type': 'text/json' });
+    //         res.end();
+    //     });
+
+    // });
 }
 
 function signin(req, res) {
@@ -111,7 +104,6 @@ function signinHandler(req, res) {
 
                     token = makeToken();
                     element.token = token;
-                    console.log(token)
 
                     response.name = element.name;
                     response.username = element.username;
@@ -119,10 +111,10 @@ function signinHandler(req, res) {
                     response.token = token;
                 })
 
+                db.write_data(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify(response));
             });
-
 
         }
     })
@@ -190,6 +182,28 @@ function makeToken(length = 40) {
     }
     return result;
 }
+
+function authentication(req, res, callBack) {
+    const token = req.headers.authentication;
+    db.checkToken(token, callBack)
+}
+
+function redirectToLoginPage(req, res) {
+    const response = {
+        'status': false,
+        'response': 'login fail. please first login',
+        'url': `http://${req.headers['host']}/signin`
+    }
+    sendJsonData(req, res, response);
+}
+
+function sendJsonData(req, res, data) {
+    res.setHeader('Content-Type', 'application/json');
+    res.writeHead(200);
+    res.write(JSON.stringify(data));
+    res.end();
+}
+
 
 module.exports = {
     staticFiles,

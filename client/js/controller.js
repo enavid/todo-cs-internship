@@ -38,7 +38,6 @@ _view.addEventListener('completeButton', () => _view.render(filterItem('Complete
 
 _view.addEventListener('download', () => {
     const token = read_token();
-    console.log(token);
     // const result = confirm('Download data ?');
     // if (result) {
     fetch('/todos', {
@@ -47,18 +46,23 @@ _view.addEventListener('download', () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            // const result = data.filter((item) => {
-            //     return _model.includes(item)
-            // })
-            // if (result.length > 0) {
-            //     console.log(result)
-            //     _model.push(result);
-            //     writeToLocalStorage(result);
-            // }
+            if (data.status) {
+                console.log(data.todos)
+                // const result = data.filter((item) => {
+                //     return _model.includes(item)
+                // })
+                // if (result.length > 0) {
+                //     console.log(result)
+                //     _model.push(result);
+                //     writeToLocalStorage(result);
+                // }
 
-            // _view.render(_model);
+                //  _view.render(_model);
+                return
+            }
+            const result = confirm('You should login first.');
+            if (result) window.document.location.href = data.url;
         });
-    // }
 })
 
 _view.addEventListener('signin', () => {

@@ -94,6 +94,7 @@ function signinHandler(req, res) {
         if (data.username !== '' && data.password !== '') {
             const username = data.username;
             const password = data.password;
+
             response = {
                 'name': '',
                 'username': '',
@@ -103,7 +104,8 @@ function signinHandler(req, res) {
 
             db.read_data((data, err) => {
                 data.forEach((element) => {
-                    if (element.username !== username && element.password !== password) return
+                    const check = element.username === username && element.password === password;
+                    if (!check) return
 
                     token = makeToken();
                     element.token = token;

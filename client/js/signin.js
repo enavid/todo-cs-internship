@@ -12,13 +12,13 @@ _login.addEventListener('click', (e) => {
 
     fetch('/signin', {
         method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
         body: JSON.stringify({
             'username': _username.value,
             'password': _password.value,
         }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        }
     }).then(response => response.json())
         .then(data => {
             if (data.status === 'success') {

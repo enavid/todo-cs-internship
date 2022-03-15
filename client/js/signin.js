@@ -1,11 +1,8 @@
 const _get = document.getElementById.bind(document);
 
-
 const _login = _get('login');
 const _password = _get('password');
 const _username = _get('username');
-
-
 
 _login.addEventListener('click', (e) => {
     e.preventDefault();
@@ -24,6 +21,7 @@ _login.addEventListener('click', (e) => {
             if (data.status === 'success') {
                 console.log(data.username)
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('status', 'login');
                 localStorage.setItem('name', data.name);
                 localStorage.setItem('username', data.username);
                 return window.document.location.href = '/index.html';

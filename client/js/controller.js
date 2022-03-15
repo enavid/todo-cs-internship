@@ -87,8 +87,23 @@ _view.addEventListener('upload', () => {
     // }
 })
 
-_view.addEventListener('signin', () => {
+_view.addEventListener('login', () => {
     window.document.location.href = '/signin';
+})
+
+_view.addEventListener('logout', () => {
+    const name = localStorage.getItem('name');
+    const result = window.confirm(name + ' , Do you want to logout ?');
+
+    if (result) {
+        localStorage.setItem('token', undefined);
+        localStorage.setItem('status', 'guest');
+        localStorage.setItem('name', undefined);
+        localStorage.setItem('username', undefined);
+
+        _view.setName('Guest');
+        _view.changeButton('logout');
+    }
 })
 
 _view.addEventListener('signup', () => {
@@ -114,10 +129,19 @@ function read_token() {
     return localStorage.getItem('token');
 }
 
+
 (function checkLocalStorage() {
     const model = JSON.parse(localStorage.getItem('model'));
-    if (model) {
-        _model.push(...model);
+    const status = localStorage.getItem('status');
+
+    if (model) _model.push(...model);
+    if (status == 'login') {
+        _view.setName(localStorage.getItem('name'));
+        _view.changeButton('login')
     }
+    else _view.setName('Guest')
 })()
+
+
+
 

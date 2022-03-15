@@ -2,12 +2,15 @@ const _get = document.getElementById.bind(document);
 const _addButton = _get('addButton');
 const _textField = _get('textField');
 const _list = _get('list');
+const _name = _get('name');
+const _loginButton = _get('login')
+const _logoutButton = _get('logout')
 const _buttons = _get('buttons');
 const _eventHandler = {};
 
 //================================ view API ===========================
 
-export default { render, renderSingleItem, addEventListener };
+export default { render, renderSingleItem, addEventListener, setName, changeButton };
 
 //=========================== view event listener ====================
 _addButton.addEventListener('click', (e) => {
@@ -27,7 +30,8 @@ _buttons.addEventListener('click', (e) => {
     if (event === 'Upload' && _eventHandler['upload']) _eventHandler['upload']();
     if (event === 'Download' && _eventHandler['download']) _eventHandler['download']();
     if (event === 'signup' && _eventHandler['signup']) _eventHandler['signup']();
-    if (event === 'signin' && _eventHandler['signin']) _eventHandler['signin']();
+    if (event === 'login' && _eventHandler['login']) _eventHandler['login']();
+    if (event === 'logout' && _eventHandler['logout']) _eventHandler['logout']();
 })
 
 //=========================== Define view function ===================
@@ -135,4 +139,20 @@ function creatItem(todo) {
 
     //================================ Module AIP===========================
     return li;
+}
+
+function setName(name = 'Guest') {
+    _name.innerHTML = name + ' Add a New Task'
+}
+
+function changeButton(state) {
+    console.log('navdddddddddddddddddddddd')
+    if (state === 'login') {
+        _loginButton.style.display = 'none';
+        _logoutButton.style.display = 'inline-block';
+    }
+    else if (state === 'logout') {
+        _loginButton.style.display = 'inline-block';
+        _logoutButton.style.display = 'none';
+    }
 }

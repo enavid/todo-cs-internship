@@ -47,18 +47,6 @@ function postTodos(req, res) {
         })
         sendJsonData(req, res, { 'status': true, 'response': 'Todos saved successfully!' })
     })
-
-
-
-
-
-    // req.on('end', () => {
-    //     fs.writeFile(todosPath, dataBuffer, () => {
-    //         res.writeHead(200, { 'Content-Type': 'text/json' });
-    //         res.end();
-    //     });
-
-    // });
 }
 
 function signin(req, res) {

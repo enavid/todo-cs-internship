@@ -66,25 +66,25 @@ _view.addEventListener('download', () => {
 })
 
 _view.addEventListener('upload', () => {
-    // const result = confirm('Upload data ?');
-    // if (result) {
-    const token = read_token();
-    console.log(_model)
-    fetch('/todos', {
-        method: 'POST',
-        headers: { 'authentication': token, 'Content-Type': 'application/json' },
-        body: JSON.stringify(_model),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status) {
-                console.log(data)
-                return
-            }
-            const result = confirm('You should login first.');
-            if (result) window.document.location.href = data.url;
+    const result = confirm('Upload data ?');
+    if (result) {
+        const token = read_token();
+        console.log(_model)
+        fetch('/todos', {
+            method: 'POST',
+            headers: { 'authentication': token, 'Content-Type': 'application/json' },
+            body: JSON.stringify(_model),
         })
-    // }
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    console.log(data)
+                    return
+                }
+                const result = confirm('You should login first.');
+                if (result) window.document.location.href = data.url;
+            })
+    }
 })
 
 _view.addEventListener('login', () => {

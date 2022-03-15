@@ -95,12 +95,7 @@ function signinHandler(req, res) {
             const username = data.username;
             const password = data.password;
 
-            response = {
-                'name': '',
-                'username': '',
-                'status': 'fail',
-                'token': ''
-            }
+            response = { 'name': '', 'username': '', 'status': 'fail', 'token': '' }
 
             db.read_data((data, err) => {
                 data.forEach((element) => {
@@ -148,13 +143,9 @@ function signup(req, res) {
 function signupHandler(req, res) {
     var data;
 
-    req.on('data', (chunk) => {
-        data = JSON.parse(chunk.toString('utf-8'));
-    });
+    req.on('data', chunk => data = JSON.parse(chunk.toString('utf-8')))
 
     req.on('end', () => {
-        res.writeHead(200, { 'Content-Type': 'text/json' });
-        res.end();
 
         if (data.username !== '' || data.password !== '') {
 
@@ -173,7 +164,13 @@ function signupHandler(req, res) {
                 db.write_data(res);
             });
 
+            sendJsonData(req, res, {
+                'status': true,
+                'response': 'user sign up successfully!',
+                'url': `http://${req.headers['host']}/signin`,
+            })
         }
+
     })
 }
 

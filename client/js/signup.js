@@ -25,12 +25,10 @@ _login.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(data => {
             if (data.status) {
-                console.log(data)
                 const result = window.confirm('User created successfully. You want login in ?');
                 if (result) return window.document.location.href = data.url;
             }
-
+            window.alert(data.response)
         })
-
 })
 

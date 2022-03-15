@@ -164,12 +164,18 @@ function signupHandler(req, res) {
                 db.write_data(res);
             });
 
-            sendJsonData(req, res, {
+            return sendJsonData(req, res, {
                 'status': true,
                 'response': 'user sign up successfully!',
                 'url': `http://${req.headers['host']}/signin`,
             })
         }
+
+        sendJsonData(req, res, {
+            'status': false,
+            'response': 'Try agin',
+            'url': `http://${req.headers['host']}/signup`,
+        })
 
     })
 }

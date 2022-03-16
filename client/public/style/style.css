@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Times New Roman', Times, serif, Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -11,7 +11,6 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #DDDDDD;
-    /* background-image: url('./img/1.jpg'); */
     background-attachment: fixed;
     background-size: cover;
 }
@@ -35,7 +34,7 @@ header p {
 }
 
 form input[type=text] {
-    width: 70vw;
+    width: 59vw;
     height: 8vh;
     padding: 25px;
     outline: none;
@@ -45,11 +44,12 @@ form input[type=text] {
 
 form input[type=submit] {
     background: #3387ED;
-    width: 10vw;
+    font-size: 14px;
+    width: 12.5vw;
     height: 50px;
     border: none;
     border-radius: 10px;
-
+    margin: 0px;
 }
 
 /* ============================= Main ============================= */
@@ -67,22 +67,40 @@ section {
     height: 100%;
 }
 
+#section-list {
+    width: 80vw;
+    height: 75%;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
 ul {
     display: flex;
     flex-direction: column;
     justify-content: first baseline;
     align-items: center;
     list-style: none;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
+}
+
+#section-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 15%;
+    width: 80vw;
+    margin-bottom: 0px;
 }
 
 li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80vw;
-    height: 60px;
+    width: 69vw;
+    height: 59px;
     padding: 15px;
     margin: 5px;
     border: 2px solid #20bf6b;

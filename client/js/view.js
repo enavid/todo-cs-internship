@@ -7,7 +7,8 @@ const _loginButton = _get('login')
 const _logoutButton = _get('logout')
 const _downloadButton = _get('downloadButton')
 const _uploadButton = _get('uploadButton')
-const _buttons = _get('buttons');
+const _signupButton = _get('signup')
+const _buttons = _get('buttons'); signup
 const _eventHandler = {};
 
 //================================ view API ===========================
@@ -154,12 +155,14 @@ function setName(name = 'Guest') {
 function changeButton(state) {
     if (state === 'login') {
         _loginButton.style.display = 'none';
+        _signupButton.style.display = 'none';
         _logoutButton.style.display = 'inline-block';
         _downloadButton.style.display = 'inline-block';
         _uploadButton.style.display = 'inline-block';
     }
     else if (state === 'logout') {
         _loginButton.style.display = 'inline-block';
+        _signupButton.style.display = 'inline-block';
         _logoutButton.style.display = 'none';
         _downloadButton.style.display = 'none';
         _uploadButton.style.display = 'none';

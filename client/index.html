@@ -12,34 +12,36 @@
 </head>
 
 <body>
-    <header>
-        <p id="name">Guest Add a New Task</p>
-        <form name="todoForm">
-            <input id="textField" type="text" placeholder="Write new task here ...">
-            <input id="addButton" type="submit" value="Add">
-        </form>
-    </header>
-    <main>
-        <section id="section-list">
-            <ul id="list"></ul>
-        </section>
-        <section id="section-buttons">
-            <form id="buttons">
-                <input id="allButton" type="submit" value="All">
-                <input id="activeButton" type="submit" value="Active">
-                <input id="completeButton" type="submit" value="Complete">
-                <input id="downloadButton" type="submit" value="Download">
-                <input id="uploadButton" type="submit" value="Upload">
-                <input id="signup" type="submit" value="signup">
-                <input id="login" type="submit" value="login">
-                <input id="logout" type="submit" value="logout">
+    <div class="container">
+        <header>
+            <p id="name">Guest Add a New Task</p>
+            <form id="formInput" name="todoForm">
+                <input id="textField" type="text" placeholder="Write new task here ...">
+                <input id="addButton" type="submit" value="Add">
             </form>
-        </section>
-    </main>
-    <footer>
-        <p>Todo list application</p>
-        <a href="https://github.com/enavid">Github address</link>
-    </footer>
+        </header>
+        <main>
+            <section id="section-list">
+                <ul id="list"></ul>
+            </section>
+            <section id="section-buttons">
+                <form id="buttons">
+                    <input id="allButton" type="submit" value="All">
+                    <input id="activeButton" type="submit" value="Active">
+                    <input id="completeButton" type="submit" value="Complete">
+                    <input id="downloadButton" type="submit" value="Download">
+                    <input id="uploadButton" type="submit" value="Upload">
+                    <input id="signup" type="submit" value="signup">
+                    <input id="login" type="submit" value="login">
+                    <input id="logout" type="submit" value="logout">
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>Todo list application</p>
+            <a href="https://github.com/enavid">Github address</link>
+        </footer>
+    </div>
     <script type="module" src="js/controller.js"></script>
 </body>
 

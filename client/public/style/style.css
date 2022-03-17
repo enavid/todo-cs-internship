@@ -7,14 +7,27 @@
 }
 
 body {
+    background-color:#DDDDDD;
+    font-family: 'Open Sans','sans-serif';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container{
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+    width:500px;
+    height: 95vh;
     background-color: #DDDDDD;
     background-attachment: fixed;
     background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 
 /* ============================= Header =========================== */
 header {
@@ -34,10 +47,15 @@ header p {
     margin-bottom: 20px;
 }
 
+#formInput{
+    display: flex;
+    align-items: center;
+    width: 88% ;
+}
+
 form input[type=text] {
-    width: 59vw;
-    height: 8vh;
-    padding: 25px;
+    width: 80% ;
+    padding: 18px;
     outline: none;
     border: 2px solid #20bf6b;
     border-radius: 10px;
@@ -46,19 +64,18 @@ form input[type=text] {
 form input[type=submit] {
     background: #3387ED;
     font-size: 14px;
-    width: 12.5vw;
+    width: 75px;
     height: 50px;
     border: none;
     border-radius: 10px;
-    margin: 0px;
 }
 
 /* ============================= Main ============================= */
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
     width: 100%;
     height: 60%;
 }
@@ -69,43 +86,51 @@ section {
 }
 
 #section-list {
-    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     height: 75%;
-    margin-top: 0px;
-    margin-bottom: 15px;
 }
 
 ul {
     display: flex;
     flex-direction: column;
-    justify-content: first baseline;
-    align-items: center;
-    list-style: none;
+    align-items: center; 
     overflow-y: auto;
-    width: 100%;
-    height: 100%;
+    scrollbar-gutter: stable; 
 }
 
-#section-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 15%;
-    width: 80vw;
-    margin-bottom: 0px;
+ul::-webkit-scrollbar {
+    display: none; 
 }
 
 li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 69vw;
+    width: 85%;
     height: 59px;
     padding: 15px;
     margin: 5px;
     border: 2px solid #20bf6b;
     border-radius: 10px;
+}
+
+#section-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content:center ;
+    justify-content: space-around;
+    height: 15%;
+    width: 100%;
+    margin-bottom: 0px; 
+}
+
+#buttons input{
+    width: 70px;
+    cursor: pointer;
+    margin:0;
 }
 
 img {
@@ -164,7 +189,6 @@ i {
 #confirmEdit {
     display: flex;
     flex-direction: row;
-
 }
 
 .inputEdit {
@@ -191,4 +215,26 @@ footer {
 
 a {
     text-decoration: none;
+}
+
+#login{
+    border: 200px ;
+    background-color: #04AA6D;
+    color: #fff;
+}
+#signup{
+    background-color:#3498db;
+}
+#downloadButton{
+    background-color:#3498db;  
+}
+#uploadButton{
+    background-color:#3498db;  
+}
+#logout{
+    background-color:#3498db;
+    color: white;
+} 
+#addButton{
+    cursor: pointer;
 }

@@ -1,34 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" id='test'>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login page</title>
+    <title>Form Validator</title>
     <link rel="stylesheet" href="public/style/signup.css">
 </head>
 
 <body>
-    <form>
-        <div class="login">
-            <p>login page</p>
-        </div>
-        <div class="container">
-            <label for="name"><b>Name</b></label>
-            <input id="name" type="text" placeholder="Enter name" name="name" required>
-            <label for="uname"><b>Username</b></label>
-            <input id="username" type="text" placeholder="Enter Username" name="uname" required>
-            <label for="psw"><b>Password</b></label>
-            <input id="password" type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit" id="login">Login</button>
-        </div>
-    </form>
-
-    <footer>
-        <p>Todo list application</p>
-        <a href="https://github.com/enavid">Github address</link>
-    </footer>
+    <div class="container">
+        <form id="form" class="form">
+            <h2>Register with Us</h2>
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter name">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Enter email">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="password2">Confirm Password</label>
+                <input type="password" id="password2" placeholder="Enter password again">
+                <small>Error message</small>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
     <script type="module" src="js/signup.js"></script>
 </body>
 

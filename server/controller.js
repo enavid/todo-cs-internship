@@ -139,6 +139,7 @@ function signupHandler(req, res) {
                 'name': data.name,
                 'username': data.username,
                 'password': data.password,
+                'email': data.email,
                 'token': '',
                 'todos': []
             }

@@ -42,19 +42,11 @@ function showError(input, message) {
     small.innerText = message;
 }
 
-//Show success outline
-function showSuccess(input) {
-    const formControl = input.parentElement;
-    formControl.className = 'form-control success';
-}
 //Check required fields
 function checkRequired(inputArray) {
     inputArray.forEach(function (input) {
         if (input.value.trim() === '') {
             showError(input, `${getFieldName(input)} is required`);
-        }
-        else {
-            showSuccess(input)
         }
     });
 }
@@ -74,10 +66,9 @@ function checkLength(input, min, max) {
         showError(input, `${getFieldName(input)} must be less than ${max} characters`);
         return false;
     }
-    else {
-        showSuccess(input);
-        return true;
-    }
+
+    return true;
+
 }
 
 //Send data to server

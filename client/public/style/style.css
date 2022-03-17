@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color:#DDDDDD;
+    background-color:#E0E0E0;
     font-family: 'Open Sans','sans-serif';
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     width:500px;
     height: 95vh;
-    background-color: #DDDDDD;
+    background-color: #F6F6F6;
     background-attachment: fixed;
     background-size: cover;
     border-radius: 10px;
@@ -232,7 +232,7 @@ a {
     background-color:#3498db;  
 }
 #logout{
-    background-color:#3498db;
+    background-color:#555555;
     color: white;
 } 
 #addButton{
